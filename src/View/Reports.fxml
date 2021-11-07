@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane prefHeight="500.0" prefWidth="780.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Appts By Type and Month">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ComboBox layoutX="51.0" layoutY="149.0" prefHeight="38.0" prefWidth="135.0" promptText="Select Month" />
+                        <ComboBox layoutX="207.0" layoutY="148.0" prefHeight="40.0" prefWidth="134.0" promptText="Select Appt Type" />
+                        <Label layoutX="371.0" layoutY="153.0" prefHeight="29.0" prefWidth="122.0" text="Number of Appts" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Contact Schedules">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ComboBox layoutX="26.0" layoutY="31.0" prefHeight="42.0" prefWidth="120.0" promptText="Select Contact" />
+                         <TableView layoutX="14.0" layoutY="140.0" prefHeight="243.0" prefWidth="751.0">
+                             <columns>
+                                 <TableColumn prefWidth="66.40002727508545" text="ID" />
+                                 <TableColumn minWidth="0.0" prefWidth="133.0" text="Name" />
+                                 <TableColumn minWidth="0.0" prefWidth="254.99998474121094" text="Address" />
+                                 <TableColumn minWidth="0.0" prefWidth="130.60003662109375" text="Zip Code" />
+                                 <TableColumn maxWidth="354.199951171875" minWidth="0.0" prefWidth="168.60009765625" text="Phone Number" />
+                             </columns>
+                         </TableView>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Appts Today">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+
+                </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
