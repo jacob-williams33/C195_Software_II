@@ -26,6 +26,7 @@
       <Button layoutX="171.0" layoutY="408.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Update" />
       <Button layoutX="588.0" layoutY="408.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Main Menu" />
       <Button layoutX="729.0" layoutY="408.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="108.0" text="Log Out" />
+      <Button layoutX="315.0" layoutY="408.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="108.0" text="Delete" />
    </children>
    <opaqueInsets>
       <Insets />
