@@ -14,17 +14,26 @@
       </Label>
       <TableView layoutX="37.0" layoutY="140.0" prefHeight="245.0" prefWidth="800.0">
         <columns>
-            <TableColumn prefWidth="102.39997100830078" text="ID" />
-          <TableColumn minWidth="0.0" prefWidth="230.80001831054688" text="Name" />
-          <TableColumn minWidth="0.0" prefWidth="207.59994506835938" text="Address" />
-            <TableColumn minWidth="0.0" prefWidth="96.4000244140625" text="Zip Code" />
-            <TableColumn maxWidth="208.0" minWidth="0.0" prefWidth="163.0" text="Phone Number" />
+            <TableColumn prefWidth="75.0" text="Appt ID" />
+            <TableColumn prefWidth="46.20001220703125" text="Title" />
+            <TableColumn prefWidth="70.80001831054688" text="Description" />
+            <TableColumn prefWidth="71.60000610351562" text="Location" />
+            <TableColumn prefWidth="75.20001220703125" text="Contact" />
+            <TableColumn prefWidth="56.0" text="Type" />
+            <TableColumn prefWidth="123.20001220703125" text="Start Date and Time" />
+            <TableColumn prefWidth="124.20001220703125" text="End Date and Time" />
+            <TableColumn prefWidth="77.39996337890625" text="Customer_ID" />
+            <TableColumn prefWidth="81.79998779296875" text="User_ID" />
+
         </columns>
       </TableView>
       <Button layoutX="37.0" layoutY="408.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="108.0" text="Add" />
       <Button layoutX="171.0" layoutY="408.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Update" />
       <Button layoutX="588.0" layoutY="408.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Main Menu" />
       <Button layoutX="729.0" layoutY="408.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="108.0" text="Log Out" />
+      <RadioButton layoutX="37.0" layoutY="87.0" mnemonicParsing="false" text="All Appts" />
+      <RadioButton layoutX="117.0" layoutY="87.0" mnemonicParsing="false" text="Appts By Month" />
+      <RadioButton layoutX="235.0" layoutY="87.0" mnemonicParsing="false" text="Appts By Week" />
    </children>
    <opaqueInsets>
       <Insets />
