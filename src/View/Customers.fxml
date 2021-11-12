@@ -14,11 +14,12 @@
       </Label>
       <TableView layoutX="37.0" layoutY="140.0" prefHeight="245.0" prefWidth="800.0">
         <columns>
-            <TableColumn prefWidth="102.39997100830078" text="ID" />
-          <TableColumn minWidth="0.0" prefWidth="230.80001831054688" text="Name" />
-          <TableColumn minWidth="0.0" prefWidth="207.59994506835938" text="Address" />
-            <TableColumn minWidth="0.0" prefWidth="96.4000244140625" text="Postal Code" />
-            <TableColumn maxWidth="208.0" minWidth="0.0" prefWidth="163.0" text="Phone Number" />
+            <TableColumn prefWidth="103.0" text="Division" />
+            <TableColumn prefWidth="90.0" text="ID" />
+          <TableColumn minWidth="0.0" prefWidth="142.0" text="Name" />
+          <TableColumn minWidth="0.0" prefWidth="196.0" text="Address" />
+            <TableColumn minWidth="0.0" prefWidth="74.0" text="Postal Code" />
+            <TableColumn maxWidth="350.0" minWidth="0.0" prefWidth="194.0" text="Phone Number" />
         </columns>
       </TableView>
 
