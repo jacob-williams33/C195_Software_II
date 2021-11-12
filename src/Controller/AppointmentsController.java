@@ -13,40 +13,40 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainMenuController implements Initializable {
-
+public class AppointmentsController implements Initializable {
     Stage stage;
     Parent scene;
 
     @FXML
-    void onActionCustomers(ActionEvent event) throws IOException {
+    void onActionAddAppointment(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/Customers.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/View/AddAppointment.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
 
     @FXML
-    void onActionAppointments(ActionEvent event) throws IOException {
+    void onActionUpdateAppointment(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/Appointments.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/View/UpdateAppointment.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
     @FXML
-    void onActionReports(ActionEvent event) throws IOException {
+    void onActionMainMenuA(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/Reports.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
     @FXML
-    void onActionLogOut(ActionEvent event) throws IOException {
+    void onActionLogOutA(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/View/LogIn.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb){

@@ -13,19 +13,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LogInController implements Initializable {
+public class AddAppointmentController implements Initializable {
 
     Stage stage;
     Parent scene;
 
     @FXML
-    void onActionLogIn(ActionEvent event) throws IOException {
+    void onActionCancelAddAppointment(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/View/Appointments.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
-
 
 
     @Override
@@ -33,5 +32,3 @@ public class LogInController implements Initializable {
 
     }
 }
-
-
