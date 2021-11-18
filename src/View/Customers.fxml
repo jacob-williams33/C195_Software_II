@@ -12,14 +12,14 @@
             <Font size="51.0" />
          </font>
       </Label>
-      <TableView layoutX="37.0" layoutY="140.0" prefHeight="245.0" prefWidth="800.0">
+      <TableView fx:id="customersTable" layoutX="37.0" layoutY="140.0" prefHeight="245.0" prefWidth="800.0">
         <columns>
-            <TableColumn prefWidth="103.0" text="Division" />
-            <TableColumn prefWidth="90.0" text="ID" />
-          <TableColumn minWidth="0.0" prefWidth="142.0" text="Name" />
-          <TableColumn minWidth="0.0" prefWidth="196.0" text="Address" />
-            <TableColumn minWidth="0.0" prefWidth="74.0" text="Postal Code" />
-            <TableColumn maxWidth="350.0" minWidth="0.0" prefWidth="194.0" text="Phone Number" />
+            <TableColumn fx:id="divisionCOL" prefWidth="103.0" text="Division" />
+            <TableColumn fx:id="IDCOL" prefWidth="90.0" text="ID" />
+          <TableColumn fx:id="nameCOL" minWidth="0.0" prefWidth="142.0" text="Name" />
+          <TableColumn fx:id="addressCOL" minWidth="0.0" prefWidth="196.0" text="Address" />
+            <TableColumn fx:id="postalCodeCOL" minWidth="0.0" prefWidth="74.0" text="Postal Code" />
+            <TableColumn fx:id="phoneNumberCOL" maxWidth="350.0" minWidth="0.0" prefWidth="194.0" text="Phone Number" />
         </columns>
       </TableView>
 

@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Customers;
+import Model.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,6 +21,28 @@ import java.util.ResourceBundle;
 public class CustomersController implements Initializable {
     Stage stage;
     Parent scene;
+
+    @FXML
+    public TableView<Customers> customersTable;
+
+    @FXML
+    public TableColumn<Customers, Integer> divisionCOL;
+
+    @FXML
+    public TableColumn<Customers, Integer> IDCOL;
+
+    @FXML
+    public TableColumn<Customers, String> nameCOL;
+
+    @FXML
+    public TableColumn<Customers, String> addressCOL;
+
+    @FXML
+    public TableColumn<Customers, String> postalCodeCOL;
+
+    @FXML
+    public TableColumn<Customers, String> phoneNumberCOL;
+
 
     @FXML
     void onActionAddCustomer(ActionEvent event) throws IOException {
@@ -50,6 +77,14 @@ public class CustomersController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
+
+            customersTable.setItems(JDBC.getAllCustomers());
+            divisionCOL.setCellValueFactory(new PropertyValueFactory<>("Division_ID"));
+            IDCOL.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
+            nameCOL.setCellValueFactory(new PropertyValueFactory<>("Customer_Name"));
+            addressCOL.setCellValueFactory(new PropertyValueFactory<>("Address"));
+            postalCodeCOL.setCellValueFactory(new PropertyValueFactory<>("Postal_Code"));
+            phoneNumberCOL.setCellValueFactory(new PropertyValueFactory<>("Phone"));
 
     }
 }
