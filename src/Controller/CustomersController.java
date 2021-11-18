@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Customers;
+import Model.DBCustomers;
 import Model.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -78,7 +79,7 @@ public class CustomersController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
 
-            customersTable.setItems(JDBC.getAllCustomers());
+            customersTable.setItems(DBCustomers.getAllCustomers());
             divisionCOL.setCellValueFactory(new PropertyValueFactory<>("Division_ID"));
             IDCOL.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
             nameCOL.setCellValueFactory(new PropertyValueFactory<>("Customer_Name"));

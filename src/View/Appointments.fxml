@@ -12,18 +12,18 @@
             <Font size="51.0" />
          </font>
       </Label>
-      <TableView layoutX="37.0" layoutY="140.0" prefHeight="245.0" prefWidth="800.0">
+      <TableView fx:id="appointmentsTable" layoutX="37.0" layoutY="140.0" prefHeight="245.0" prefWidth="800.0">
         <columns>
-            <TableColumn prefWidth="75.0" text="Appt ID" />
-            <TableColumn prefWidth="46.20001220703125" text="Title" />
-            <TableColumn prefWidth="70.80001831054688" text="Description" />
-            <TableColumn prefWidth="71.60000610351562" text="Location" />
-            <TableColumn prefWidth="75.20001220703125" text="Contact" />
-            <TableColumn prefWidth="56.0" text="Type" />
-            <TableColumn prefWidth="123.20001220703125" text="Start Date and Time" />
-            <TableColumn prefWidth="124.20001220703125" text="End Date and Time" />
-            <TableColumn prefWidth="77.39996337890625" text="Customer_ID" />
-            <TableColumn prefWidth="81.79998779296875" text="User_ID" />
+            <TableColumn fx:id="apptIDCOL" prefWidth="45.0" text="Appt ID" />
+            <TableColumn fx:id="titleCOL" prefWidth="46.20001220703125" text="Title" />
+            <TableColumn fx:id="descriptionCOL" prefWidth="70.80001831054688" text="Description" />
+            <TableColumn fx:id="locationCOL" prefWidth="71.60000610351562" text="Location" />
+            <TableColumn fx:id="contactCOL" prefWidth="75.20001220703125" text="Contact" />
+            <TableColumn fx:id="typeCOL" prefWidth="56.0" text="Type" />
+            <TableColumn fx:id="startCOL" prefWidth="123.20001220703125" text="Start Date and Time" />
+            <TableColumn fx:id="endCOL" prefWidth="124.20001220703125" text="End Date and Time" />
+            <TableColumn fx:id="customerCOL" prefWidth="77.39996337890625" text="Customer_ID" />
+            <TableColumn fx:id="userCOL" prefWidth="81.79998779296875" text="User_ID" />
 
         </columns>
       </TableView>
