@@ -113,6 +113,92 @@ public class JDBC {
         return cList;
 
     }
+    public static ObservableList<Divisions> getAllDivisions() {
+        ObservableList<Divisions> dList = FXCollections.observableArrayList();
+        try {
+            String sqlgetalldivisions = "SELECT Division_ID, Division, Country_ID FROM first_level_divisions";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sqlgetalldivisions);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int Division_ID = rs.getInt("Division_ID");
+                String Division = rs.getString("Division");
+                int Customer_ID = rs.getInt("Customer_ID");
+                Divisions d = new Divisions(Division_ID, Division, Customer_ID);
+                dList.add(d);
+            }
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return dList;
+
+    }
+    public static ObservableList<Contacts> getAllContacts() {
+        ObservableList<Contacts> coList = FXCollections.observableArrayList();
+        try {
+            String sqlgetallcontacts = "SELECT Contact_ID, Contact_Name FROM contacts";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sqlgetallcontacts);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int Contact_ID = rs.getInt("Contact_ID");
+                String Contact_Name = rs.getString("Contact_Name");
+                Contacts co = new Contacts(Contact_ID, Contact_Name);
+                coList.add(co);
+            }
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return coList;
+
+    }
+    public static ObservableList<Countries> getAllCountries() {
+        ObservableList<Countries> ctryList = FXCollections.observableArrayList();
+        try {
+            String sqlgetallcountries = "SELECT Country_ID, Country FROM countries";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sqlgetallcountries);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int Country_ID = rs.getInt("Country_ID");
+                String Country = rs.getString("Country");
+                Countries ctry = new Countries(Country_ID, Country);
+                ctryList.add(ctry);
+            }
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return ctryList;
+
+    }
+    public static ObservableList<Users> getAllUsers() {
+        ObservableList<Users> uList = FXCollections.observableArrayList();
+        try {
+            String sqlgetallusers = "SELECT User_ID, User_Name, Password FROM users";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sqlgetallusers);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int User_ID = rs.getInt("User_ID");
+                String User_Name = rs.getString("User_Name");
+                String Password = rs.getString("Password");
+                Users u  = new Users(User_ID, User_Name, Password);
+                uList.add(u);
+            }
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return uList;
+
+    }
     public static void addCustomer(String customer_Name, String address, String postal_Code, String phone, int division_ID
     ) {
         try {
