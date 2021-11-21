@@ -40,4 +40,5 @@ public class Customers {
     public int getDivision_ID() {
         return Division_ID;
     }
+
 }

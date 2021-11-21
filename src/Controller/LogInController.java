@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.ZoneId;
+import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -21,6 +23,8 @@ public class LogInController implements Initializable {
     public Label password;
     public Label logIn;
     public Label location;
+    public Label timeZone;
+    public Button logInButton;
     ResourceBundle myRB = ResourceBundle.getBundle("Main/Language");
 
     Stage stage;
@@ -39,13 +43,13 @@ public class LogInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
 
-//                if(Locale.getDefault().getLanguage().equals("en") ||
-//                        Locale.getDefault().getLanguage().equals("fr"))
-
+                        logInButton.setText(myRB.getString("LogIn"));
                         userName.setText(myRB.getString("User"));
                         password.setText(myRB.getString("Password"));
                         logIn.setText(myRB.getString("LogIn"));
-                        location.setText(myRB.getString("Location"));
+                        location.setText(myRB.getString("TimeZone"));
+                        timeZone.setText(ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.ENGLISH));
+
     }
 }
 
