@@ -1,9 +1,9 @@
 package Controller;
 
 import Model.Apppointments;
-import Model.Customers;
+
 import Model.DBAppointments;
-import Model.DBCustomers;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
