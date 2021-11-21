@@ -1,9 +1,7 @@
 package Controller;
 
 import Model.Apppointments;
-
-import Model.DBAppointments;
-
+import Model.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -90,7 +88,7 @@ public class AppointmentsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        appointmentsTable.setItems(DBAppointments.getAllAppointments());
+        appointmentsTable.setItems(JDBC.getAllAppointments());
         apptIDCOL.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
         titleCOL.setCellValueFactory(new PropertyValueFactory<>("Title"));
         descriptionCOL.setCellValueFactory(new PropertyValueFactory<>("Description"));
