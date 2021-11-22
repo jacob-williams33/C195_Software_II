@@ -22,4 +22,8 @@ public class Divisions {
         Division = division;
         Country_ID = country_ID;
     }
+    @Override
+    public String toString() {
+        return Division;
+    }
 }

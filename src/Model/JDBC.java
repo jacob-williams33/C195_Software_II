@@ -123,8 +123,8 @@ public class JDBC {
             while(rs.next()) {
                 int Division_ID = rs.getInt("Division_ID");
                 String Division = rs.getString("Division");
-                int Customer_ID = rs.getInt("Customer_ID");
-                Divisions d = new Divisions(Division_ID, Division, Customer_ID);
+                int Country_ID = rs.getInt("Country_ID");
+                Divisions d = new Divisions(Division_ID, Division, Country_ID);
                 dList.add(d);
             }
         }

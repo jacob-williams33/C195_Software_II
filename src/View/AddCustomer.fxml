@@ -26,16 +26,16 @@
             <Label text="Address" GridPane.rowIndex="2" />
             <Label text="Postal Code" GridPane.rowIndex="3" />
             <Label text="Phone Number" GridPane.rowIndex="4" />
-            <TextField disable="true" text="Disabled - Auto Generated" GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="addCustomerIDTXT" disable="true" text="Disabled - Auto Generated" GridPane.columnIndex="1" />
+            <TextField fx:id="addCustomerNameTXT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="addAddressTXT" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="addPostalCodeTXT" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="addPhoneTXT" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
             <Label text="Country" GridPane.rowIndex="5" />
             <Label text="State/Province/County" GridPane.rowIndex="6" />
-            <ComboBox prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <ComboBox prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox fx:id="countryCombo" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="divisionCombo" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
       <Label layoutX="26.0" layoutY="14.0" prefHeight="40.0" prefWidth="351.0" text="Add Customer">
