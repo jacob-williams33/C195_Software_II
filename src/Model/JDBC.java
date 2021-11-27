@@ -199,16 +199,22 @@ public class JDBC {
         return uList;
 
     }
-    public static void addCustomer(String customer_Name, String address, String postal_Code, String phone, int division_ID
-    ) {
+    //need to fix date and created by to incorporate correct user and date
+    public static void addCustomer(String customer_Name, String address, String postal_Code, String phone, Integer division_ID)
+     {
         try {
-            String sqladdcustomer = "INSERT INTO customers VALUES (NULL, ?, ?, ?, ?, ?)";
+            String today = new Timestamp(new java.util.Date().getTime()).toString();
+            String sqladdcustomer = "INSERT INTO customers VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement psac = JDBC.getConnection().prepareStatement(sqladdcustomer);
             psac.setString(1, customer_Name);
             psac.setString(2, address);
             psac.setString(3, postal_Code);
             psac.setString(4, phone);
-            psac.setInt(5, division_ID);
+            psac.setString(5, today);
+            psac.setString(6, "user");
+            psac.setString(7, today);
+            psac.setString(8, "other user");
+            psac.setInt(9, division_ID);
             psac.execute();
 
 

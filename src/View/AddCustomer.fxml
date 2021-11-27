@@ -43,7 +43,7 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Button layoutX="428.0" layoutY="125.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="128.0" text="Save">
+      <Button layoutX="428.0" layoutY="125.0" mnemonicParsing="false" onAction="#onActionSaveCustomer" prefHeight="46.0" prefWidth="128.0" text="Save">
          <font>
             <Font size="21.0" />
          </font></Button>

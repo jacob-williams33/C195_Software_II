@@ -1,11 +1,11 @@
 package Model;
 
 public class Divisions {
-    private Integer Division_ID;
-    private String Division;
-    private Integer Country_ID;
+    public static Integer Division_ID;
+    public String Division;
+    public Integer Country_ID;
 
-    public Integer getDivision_ID() {
+    public static Integer getDivision_ID() {
         return Division_ID;
     }
 

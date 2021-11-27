@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,11 +33,28 @@ public class AddCustomerController implements Initializable {
     Parent scene;
 
     @FXML
+    void onActionSaveCustomer(ActionEvent event) throws IOException {
+        String customer_Name = addCustomerNameTXT.getText();
+        String address = addAddressTXT.getText();
+        String postal_code = addPostalCodeTXT.getText();
+        String phone = addPhoneTXT.getText();
+        Divisions divisions = divisionCombo.getValue();
+
+        JDBC.addCustomer(customer_Name, address, postal_code, phone, divisions.getDivision_ID());
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/View/Customers.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+
+    }
+
+    @FXML
     void onActionCancelAddCustomer(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/View/Customers.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+
     }
 
 
