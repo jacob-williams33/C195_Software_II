@@ -222,6 +222,19 @@ public class JDBC {
             ex.printStackTrace();
         }
     }
+    public static void deleteCustomer(int Customer_ID)
+    {
+        try {
+            String sqldeletecustomerr = "DELETE FROM customers WHERE Customer_ID = (?)";
+            PreparedStatement psdc = JDBC.getConnection().prepareStatement(sqldeletecustomerr);
+            psdc.setInt(1, Customer_ID);
+            psdc.execute();
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 
 
 

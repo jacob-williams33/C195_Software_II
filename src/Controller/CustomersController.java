@@ -8,14 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomersController implements Initializable {
@@ -54,10 +53,26 @@ public class CustomersController implements Initializable {
 
     @FXML
     void onActionUpdateCustomer(ActionEvent event) throws IOException {
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/UpdateCustomer.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/UpdateCustomer.fxml"));
+            loader.load();
+
+            UpdateCustomerController updateCustomerController = loader.getController();
+            updateCustomerController.sendCustomer(customersTable.getSelectionModel().getSelectedItem());
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Parent scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+        catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Selection Error");
+            alert.setContentText("No Product Selected");
+
+            alert.showAndWait();
+        }
     }
     @FXML
     void onActionMainMenu(ActionEvent event) throws IOException {
@@ -70,6 +85,23 @@ public class CustomersController implements Initializable {
     void onActionLogOutC(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/View/LogIn.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+    }
+
+    @FXML
+    void onActionDeleteCustomer(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText("This will permanently delete the selected customer");
+        alert.setContentText("Do you wish to continue?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            JDBC.deleteCustomer(customersTable.getSelectionModel().getSelectedItem().getCustomer_ID());
+        }
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/View/Customers.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }

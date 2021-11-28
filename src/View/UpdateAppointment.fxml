@@ -6,12 +6,13 @@
 
 <AnchorPane prefHeight="496.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UpdateAppointmentController">
    <children>
-      <GridPane layoutX="26.0" layoutY="73.0" prefHeight="285.0" prefWidth="618.0">
+      <GridPane layoutX="26.0" layoutY="73.0" prefHeight="285.0" prefWidth="557.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.6" minWidth="10.0" prefWidth="120.6" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.00000762939453" minWidth="10.0" prefWidth="183.4" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="194.00000762939453" minWidth="10.0" prefWidth="183.4" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.00000762939453" minWidth="10.0" prefWidth="183.4" />
+            <ColumnConstraints />
+
 
         </columnConstraints>
         <rowConstraints>
@@ -32,10 +33,10 @@
             <Label text="Description" GridPane.rowIndex="2" />
             <Label text="Location" GridPane.rowIndex="3" />
             <Label text="Contact" GridPane.rowIndex="4" />
-            <TextField disable="true" text="Disabled - Auto Generated" GridPane.columnIndex="1" GridPane.columnSpan="3" />
-            <TextField prefWidth="421.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-            <TextField prefWidth="338.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+            <TextField fx:id="upAppID" disable="true" text="Disabled - Auto Generated" GridPane.columnIndex="1" GridPane.columnSpan="3" />
+            <TextField fx:id="upAppTitle" prefWidth="421.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+            <TextField fx:id="upAppDesc" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+            <TextField fx:id="location" prefWidth="338.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" />
         
 
             <Label text="Type" GridPane.rowIndex="5" />
@@ -44,16 +45,13 @@
             <Label text="End" GridPane.rowIndex="7" />
             <Label text="Customer_ID" GridPane.rowIndex="8" />
             <Label text="User_ID" GridPane.rowIndex="9" />
-            <ComboBox prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ComboBox fx:id="upAppContact" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8" />
             <TextField GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="9" />
-            <TextField GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+            <TextField fx:id="upAppType" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
             <DatePicker promptText="Select Date" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <ComboBox prefWidth="150.0" promptText="Hour" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <ComboBox prefWidth="150.0" promptText="Minute" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-            <ComboBox prefWidth="150.0" promptText="Hour" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <ComboBox prefWidth="150.0" promptText="Minute" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-
+            <ComboBox prefWidth="150.0" promptText="Select Start Time..." GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <ComboBox prefWidth="150.0" promptText="Select End Time...." GridPane.columnIndex="2" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <Label layoutX="26.0" layoutY="14.0" prefHeight="40.0" prefWidth="351.0" text="Update Appointment">
