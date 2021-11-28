@@ -1,18 +1,20 @@
 package Model;
 
+import java.time.LocalDateTime;
+
 public class Apppointments {
     private int Appointment_ID;
     private String Title;
     private String Description;
     private String Location;
     private String Type;
-    private String Start;
-    private String End;
+    private LocalDateTime Start;
+    private LocalDateTime End;
     private Integer Customer_ID;
     private Integer User_ID;
     private Integer Contact_ID;
 
-    public Apppointments(int appointment_ID, String title, String description, String location, String type, String start, String end, Integer customer_ID, Integer user_ID, Integer contact_ID) {
+    public Apppointments(int appointment_ID, String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, Integer customer_ID, Integer user_ID, Integer contact_ID) {
         Appointment_ID = appointment_ID;
         Title = title;
         Description = description;
@@ -45,11 +47,11 @@ public class Apppointments {
         return Type;
     }
 
-    public String getStart() {
+    public LocalDateTime getStart() {
         return Start;
     }
 
-    public String getEnd() {
+    public LocalDateTime getEnd() {
         return End;
     }
 

@@ -33,12 +33,42 @@ public class UpdateCustomerController implements Initializable {
     Parent scene;
 
 
-    public void sendCustomer (Customers customers) {
+
+    public void populateSelectedCustomer (Customers customers) {
         updateCustomerIDTXT.setText(String.valueOf(customers.getCustomer_ID()));
         updateCustomerNameTXT.setText(customers.getCustomer_Name());
         updateAddressTXT.setText(customers.getAddress());
         updatePostalCodeTXT.setText(customers.getPostal_Code());
         updatePhoneTXT.setText(customers.getPhone());
+        for (Countries c : updateCountryCombo.getItems()) {
+            if (customers.getCountry_ID() == c.getCountry_ID()) {
+                updateCountryCombo.setValue(c);
+                break;
+            }
+        }
+        for (Divisions d : updateDivisionCombo.getItems()) {
+            if (customers.getDivision_ID() == d.getDivision_ID()) {
+                updateDivisionCombo.setValue(d);
+                break;
+            }
+        }
+
+    }
+    @FXML
+    void onActionSaveCustomer(ActionEvent event) throws IOException {
+        String customer_ID = updateCustomerIDTXT.getText();
+        String customer_Name = updateCustomerNameTXT.getText();
+        String address = updateAddressTXT.getText();
+        String postal_code = updatePostalCodeTXT.getText();
+        String phone = updatePhoneTXT.getText();
+        Divisions divisions = updateDivisionCombo.getValue();
+
+        JDBC.updateCustomer(customer_Name, address, postal_code, phone, divisions.getDivision_ID(), customer_ID);
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/View/Customers.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+
     }
 
     @FXML
@@ -52,6 +82,11 @@ public class UpdateCustomerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-
+        updateCountryCombo.setVisibleRowCount(5);
+        updateCountryCombo.setPromptText("Select Country...");
+        updateCountryCombo.setItems(JDBC.getAllCountries());
+        updateDivisionCombo.setVisibleRowCount(5);
+        updateDivisionCombo.setPromptText("Select Division");
+        updateDivisionCombo.setItems(JDBC.getAllDivisions());
     }
 }

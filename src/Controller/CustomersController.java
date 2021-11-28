@@ -59,7 +59,7 @@ public class CustomersController implements Initializable {
             loader.load();
 
             UpdateCustomerController updateCustomerController = loader.getController();
-            updateCustomerController.sendCustomer(customersTable.getSelectionModel().getSelectedItem());
+            updateCustomerController.populateSelectedCustomer(customersTable.getSelectionModel().getSelectedItem());
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             Parent scene = loader.getRoot();
             stage.setScene(new Scene(scene));
@@ -69,7 +69,7 @@ public class CustomersController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Selection Error");
-            alert.setContentText("No Product Selected");
+            alert.setContentText("No Customer Selected");
 
             alert.showAndWait();
         }

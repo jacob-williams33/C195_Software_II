@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 
 public class JDBC {
  private static final String protocol = "jdbc";
@@ -73,8 +74,8 @@ public class JDBC {
                 String Description = rs.getString("Description");
                 String Location = rs.getString("Location");
                 String Type = rs.getString("Type");
-                String Start = rs.getString("Start");
-                String End = rs.getString("End");
+                LocalDateTime Start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime End = rs.getTimestamp("End").toLocalDateTime();
                 int Customer_ID = rs.getInt("Customer_ID");
                 int User_ID = rs.getInt("User_ID");
                 int Contact_ID = rs.getInt("Contact_ID");
@@ -91,7 +92,7 @@ public class JDBC {
     public static ObservableList<Customers> getAllCustomers() {
         ObservableList<Customers> cList = FXCollections.observableArrayList();
         try {
-            String sqlgetallcustomers = "SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone, Division_ID FROM customers";
+            String sqlgetallcustomers = "SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone, customers.Division_ID, Country_ID FROM customers, first_level_divisions WHERE customers.Division_ID = first_level_divisions.Division_ID";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sqlgetallcustomers);
             ResultSet rs = ps.executeQuery();
 
@@ -102,7 +103,8 @@ public class JDBC {
                 String Postal_Code = rs.getString("Postal_Code");
                 String Phone = rs.getString("Phone");
                 int Division_ID = rs.getInt("Division_ID");
-                Customers c = new Customers(Customer_ID, Customer_Name, Address, Postal_Code, Phone, Division_ID);
+                int Country_ID = rs.getInt("Country_ID");
+                Customers c = new Customers(Customer_ID, Customer_Name, Address, Postal_Code, Phone, Division_ID, Country_ID);
                 cList.add(c);
             }
         }
@@ -222,9 +224,29 @@ public class JDBC {
             ex.printStackTrace();
         }
     }
+    public static void updateCustomer(String customer_Name, String address, String postal_Code, String phone, Integer division_ID, String customer_ID)
+    {
+        try {
+
+            String sqlupdatecustomer = "UPDATE customers SET  Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID=?";
+            PreparedStatement psuc = JDBC.getConnection().prepareStatement(sqlupdatecustomer);
+            psuc.setString(1, customer_Name);
+            psuc.setString(2, address);
+            psuc.setString(3, postal_Code);
+            psuc.setString(4, phone);
+            psuc.setInt(5, division_ID);
+            psuc.setString(6, customer_ID);
+            psuc.execute();
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
     public static void deleteCustomer(int Customer_ID)
     {
         try {
+            //need to delete appts before this DELETE FROM appointments WHERE Customer_ID = (?)
             String sqldeletecustomerr = "DELETE FROM customers WHERE Customer_ID = (?)";
             PreparedStatement psdc = JDBC.getConnection().prepareStatement(sqldeletecustomerr);
             psdc.setInt(1, Customer_ID);
@@ -235,7 +257,5 @@ public class JDBC {
             ex.printStackTrace();
         }
     }
-
-
 
 }

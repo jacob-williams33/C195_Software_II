@@ -34,9 +34,9 @@
             <Label text="Location" GridPane.rowIndex="3" />
             <Label text="Contact" GridPane.rowIndex="4" />
             <TextField disable="true" text="Disabled - Auto Generated" GridPane.columnIndex="1" GridPane.columnSpan="2" />
-            <TextField prefWidth="421.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-            <TextField prefWidth="338.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <TextField fx:id="addAppTitleTXT" prefWidth="421.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+            <TextField fx:id="addAppDescTXT" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <TextField fx:id="addAppLocTXT" prefWidth="338.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
         
 
             <Label text="Type" GridPane.rowIndex="5" />
@@ -45,13 +45,13 @@
             <Label text="End" GridPane.rowIndex="7" />
             <Label text="Customer_ID" GridPane.rowIndex="8" />
             <Label text="User_ID" GridPane.rowIndex="9" />
-            <ComboBox prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ComboBox fx:id="contactsCombo" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <DatePicker promptText="Select Date" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <ComboBox prefWidth="150.0" promptText="Hour" GridPane.columnIndex="2" GridPane.rowIndex="6" />
             <ComboBox prefWidth="150.0" promptText="Hour" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <ComboBox prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <ComboBox prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <ComboBox prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <ComboBox fx:id="typeCombo" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="customerIDCombo" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <ComboBox fx:id="userIDCombo" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="9" />
 
          </children>
       </GridPane>
@@ -60,7 +60,7 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Button layoutX="135.0" layoutY="390.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" text="Save">
+      <Button fx:id="saveAppointment" layoutX="135.0" layoutY="390.0" mnemonicParsing="false" onAction="#saveAppointment" prefHeight="30.0" prefWidth="125.0" text="Save">
          <font>
             <Font size="27.0" />
          </font>

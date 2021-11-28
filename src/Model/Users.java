@@ -22,4 +22,8 @@ public class Users {
     public String getPassword() {
         return Password;
     }
+    @Override
+    public String toString() {
+        return String.valueOf(User_ID);
+    }
 }
