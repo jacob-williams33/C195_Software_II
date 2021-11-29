@@ -34,7 +34,7 @@
 
             <Label text="Country" GridPane.rowIndex="5" />
             <Label text="State/Province/County" GridPane.rowIndex="6" />
-            <ComboBox fx:id="updateCountryCombo" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="updateCountryCombo" onAction="#onCountrySelect" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <ComboBox fx:id="updateDivisionCombo" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>

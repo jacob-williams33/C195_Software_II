@@ -4,6 +4,8 @@ import Model.Countries;
 import Model.Customers;
 import Model.Divisions;
 import Model.JDBC;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -77,6 +79,16 @@ public class UpdateCustomerController implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/View/Customers.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+    }
+
+    public ObservableList<Divisions> divisionFilter() {
+        ObservableList<Divisions> allDivisions = JDBC.getAllDivisions();
+        FilteredList<Divisions> filteredDivisionList = new FilteredList<>(allDivisions, i -> i.getCountry_ID() == updateCountryCombo.getSelectionModel().getSelectedItem().getCountry_ID());
+        return filteredDivisionList;
+    }
+    @FXML
+    public void onCountrySelect(ActionEvent actionEvent) {
+        updateDivisionCombo.setItems(divisionFilter());
     }
 
 

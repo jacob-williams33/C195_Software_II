@@ -3,6 +3,9 @@ package Controller;
 import Model.Countries;
 import Model.Divisions;
 import Model.JDBC;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +17,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,6 +33,8 @@ public class AddCustomerController implements Initializable {
 
     Stage stage;
     Parent scene;
+
+
 
     @FXML
     void onActionSaveCustomer(ActionEvent event) throws IOException {
@@ -56,6 +60,15 @@ public class AddCustomerController implements Initializable {
         stage.show();
 
     }
+    public ObservableList<Divisions> divisionFilter() {
+        ObservableList<Divisions> allDivisions = JDBC.getAllDivisions();
+        FilteredList<Divisions> filteredDivisionList = new FilteredList<>(allDivisions, i -> i.getCountry_ID() == countryCombo.getSelectionModel().getSelectedItem().getCountry_ID());
+        return filteredDivisionList;
+    }
+    @FXML
+    public void onCountrySelect(ActionEvent actionEvent) {
+        divisionCombo.setItems(divisionFilter());
+    }
 
 
     @Override
@@ -65,6 +78,8 @@ public class AddCustomerController implements Initializable {
         countryCombo.setItems(JDBC.getAllCountries());
         divisionCombo.setVisibleRowCount(5);
         divisionCombo.setPromptText("Select Division");
-        divisionCombo.setItems(JDBC.getAllDivisions());
+
     }
+
+
 }

@@ -1,9 +1,7 @@
 package Model;
-import com.mysql.cj.jdbc.JdbcConnection;
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
+import javafx.collections.transformation.FilteredList;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -137,6 +135,7 @@ public class JDBC {
         return dList;
 
     }
+
     public static ObservableList<Contacts> getAllContacts() {
         ObservableList<Contacts> coList = FXCollections.observableArrayList();
         try {
@@ -179,6 +178,29 @@ public class JDBC {
         return ctryList;
 
     }
+//    public static Integer getCountryID(Countries country) {
+//        ObservableList<Countries> ctryList = FXCollections.observableArrayList();
+//        try {
+//            String sqlgetcountryid = "SELECT Country_ID FROM countries WHERE Country = ?";
+//            PreparedStatement ps = JDBC.getConnection().prepareStatement(sqlgetcountryid);
+//            ResultSet rs = ps.executeQuery();
+//
+//            while(rs.next()) {
+//                int Country_ID = rs.getInt("Country_ID");
+//                String Country = rs.getString("Country");
+//                Countries ctry = new Countries(Country_ID, Country);
+//                ctryList.add(ctry);
+//            }
+//        }
+//        catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//
+//        return ctryList;
+//
+//
+//    }
     public static ObservableList<Users> getAllUsers() {
         ObservableList<Users> uList = FXCollections.observableArrayList();
         try {
