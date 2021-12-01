@@ -178,29 +178,7 @@ public class JDBC {
         return ctryList;
 
     }
-//    public static Integer getCountryID(Countries country) {
-//        ObservableList<Countries> ctryList = FXCollections.observableArrayList();
-//        try {
-//            String sqlgetcountryid = "SELECT Country_ID FROM countries WHERE Country = ?";
-//            PreparedStatement ps = JDBC.getConnection().prepareStatement(sqlgetcountryid);
-//            ResultSet rs = ps.executeQuery();
-//
-//            while(rs.next()) {
-//                int Country_ID = rs.getInt("Country_ID");
-//                String Country = rs.getString("Country");
-//                Countries ctry = new Countries(Country_ID, Country);
-//                ctryList.add(ctry);
-//            }
-//        }
-//        catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//
-//        return ctryList;
-//
-//
-//    }
+
     public static ObservableList<Users> getAllUsers() {
         ObservableList<Users> uList = FXCollections.observableArrayList();
         try {
@@ -273,6 +251,35 @@ public class JDBC {
             PreparedStatement psdc = JDBC.getConnection().prepareStatement(sqldeletecustomerr);
             psdc.setInt(1, Customer_ID);
             psdc.execute();
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    //need to fix date and created by to incorporate correct user and date
+    public static void addAppointment(String title, String description, String location,
+                                      String type, LocalDateTime start, LocalDateTime end,
+                                      Integer customer_ID, Integer user_ID, Integer contact_ID)
+    {
+        try {
+            String today = new Timestamp(new java.util.Date().getTime()).toString();
+            String sqladdappointment = "INSERT INTO customers VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement psaa  = JDBC.getConnection().prepareStatement(sqladdappointment);
+            psaa.setString(1, title);
+            psaa.setString(2, description);
+            psaa.setString(3, location);
+            psaa.setString(4, type);
+            psaa.setString(5, today);
+            psaa.setString(6, today);
+            psaa.setString(7, today);
+            psaa.setString(8,"user");
+            psaa.setString(9, today);
+            psaa.setString(10,"user");
+            psaa.setInt(11, customer_ID);
+            psaa.setInt(12, user_ID);
+            psaa.setInt(13, contact_ID);
+            psaa.execute();
 
 
         } catch (SQLException ex) {
