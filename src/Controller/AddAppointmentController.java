@@ -17,17 +17,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-public class AddAppointmentController<closeBusiness> implements Initializable {
+public class AddAppointmentController implements Initializable {
 
     public TextField addAppTitleTXT;
     public TextField addAppDescTXT;
     public TextField addAppLocTXT;
     public DatePicker datePicker;
-    public ComboBox<LocalTime> startTime;
-    public ComboBox<LocalTime> endTime;
+    public ComboBox<LocalTime> startTimeCombo;
+    public ComboBox<LocalTime> endTimeCombo;
     public ComboBox<Contacts> contactsCombo;
     public ComboBox<String> typeCombo;
     public ComboBox<Customers> customerIDCombo;
@@ -36,6 +38,19 @@ public class AddAppointmentController<closeBusiness> implements Initializable {
 
     Stage stage;
     Parent scene;
+
+public LocalDateTime LDTstart() {
+    LocalTime startTime = startTimeCombo.getSelectionModel().getSelectedItem();
+    LocalDate appointmentDate = datePicker.getValue();
+    LocalDateTime LDTstart = LocalDateTime.of(appointmentDate, startTime);
+    return  LDTstart;
+}
+public LocalDateTime LDTend() {
+    LocalTime endTime = endTimeCombo.getSelectionModel().getSelectedItem();
+    LocalDate appointmentDate = datePicker.getValue();
+    LocalDateTime LDTend = LocalDateTime.of(appointmentDate, endTime);
+    return LDTend;
+}
 
     public ObservableList<String> createTypeList() {
         ObservableList<String> types = FXCollections.observableArrayList();
@@ -60,23 +75,27 @@ public class AddAppointmentController<closeBusiness> implements Initializable {
         return comboTimes;
     }
 
-//    @FXML
-//    void saveAppointment(ActionEvent event) throws IOException {
-//        String appointment_title= addAppTitleTXT.getText();
-//        String description = addAppDescTXT.getText();
-//        String location = addAppLocTXT.getText();
-//        Contacts contacts = contactsCombo.getValue();
-//        Customers customers = customerIDCombo.getValue();
-//        Users users = userIDCombo.getValue();
-//
-//
-//        JDBC.addAppointment(appointment_title, description, location, );
-//        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-//        scene = FXMLLoader.load(getClass().getResource("/View/Appointments.fxml"));
-//        stage.setScene(new Scene(scene));
-//        stage.show();
-//
-//    }
+
+    @FXML
+    void onActionSaveAppointment(ActionEvent event) throws IOException {
+        String appointment_title= addAppTitleTXT.getText();
+        String description = addAppDescTXT.getText();
+        String location = addAppLocTXT.getText();
+        String type = typeCombo.getValue();
+        LocalDateTime start = LDTstart();
+        LocalDateTime end = LDTend();
+        Contacts contacts = contactsCombo.getValue();
+        Customers customers = customerIDCombo.getValue();
+        Users users = userIDCombo.getValue();
+
+
+        JDBC.addAppointment(appointment_title, description, location, type, start, end, contacts.getContact_ID(), customers.getCustomer_ID(), users.getUser_ID());
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/View/Appointments.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+
+    }
 
     @FXML
     void onActionCancelAddAppointment(ActionEvent event) throws IOException {
@@ -92,12 +111,12 @@ public class AddAppointmentController<closeBusiness> implements Initializable {
         typeCombo.setVisibleRowCount(5);
         typeCombo.setPromptText("Select Appointment Type");
         typeCombo.setItems(createTypeList());
-        startTime.setVisibleRowCount(5);
-        startTime.setPromptText("Select Start Time");
-        startTime.setItems(timeRanges());
-        endTime.setVisibleRowCount(5);
-        endTime.setPromptText("Select End Time");
-        endTime.setItems(timeRanges());
+        startTimeCombo.setVisibleRowCount(5);
+        startTimeCombo.setPromptText("Select Start Time");
+        startTimeCombo.setItems(timeRanges());
+        endTimeCombo.setVisibleRowCount(5);
+        endTimeCombo.setPromptText("Select End Time");
+        endTimeCombo.setItems(timeRanges());
         contactsCombo.setVisibleRowCount(5);
         contactsCombo.setPromptText("Select Contact...");
         contactsCombo.setItems(JDBC.getAllContacts());

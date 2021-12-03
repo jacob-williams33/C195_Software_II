@@ -46,9 +46,9 @@
             <Label text="Customer_ID" GridPane.rowIndex="8" />
             <Label text="User_ID" GridPane.rowIndex="9" />
             <ComboBox fx:id="contactsCombo" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <DatePicker fx:id="datePicker"  promptText="Select Date" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <ComboBox fx:id="startTime" prefWidth="150.0" promptText="Hour" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <ComboBox fx:id="endTime" prefWidth="150.0" promptText="Hour" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <DatePicker fx:id="datePicker" promptText="Select Date" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox fx:id="startTimeCombo" prefWidth="150.0" promptText="Hour" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <ComboBox fx:id="endTimeCombo" prefWidth="150.0" promptText="Hour" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <ComboBox fx:id="typeCombo" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <ComboBox fx:id="customerIDCombo" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <ComboBox fx:id="userIDCombo" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="9" />
@@ -60,7 +60,7 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Button fx:id="saveAppointment" layoutX="135.0" layoutY="390.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" text="Save">
+      <Button fx:id="saveAppointment" layoutX="135.0" layoutY="390.0" mnemonicParsing="false" onAction="#onActionSaveAppointment" prefHeight="30.0" prefWidth="125.0" text="Save">
          <font>
             <Font size="27.0" />
          </font>

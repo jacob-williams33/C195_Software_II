@@ -264,14 +264,14 @@ public class JDBC {
     {
         try {
             String today = new Timestamp(new java.util.Date().getTime()).toString();
-            String sqladdappointment = "INSERT INTO customers VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sqladdappointment = "INSERT INTO appointments VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement psaa  = JDBC.getConnection().prepareStatement(sqladdappointment);
             psaa.setString(1, title);
             psaa.setString(2, description);
             psaa.setString(3, location);
             psaa.setString(4, type);
-            psaa.setString(5, today);
-            psaa.setString(6, today);
+            psaa.setTimestamp(5, Timestamp.valueOf(start));
+            psaa.setTimestamp(6, Timestamp.valueOf(end));
             psaa.setString(7, today);
             psaa.setString(8,"user");
             psaa.setString(9, today);
