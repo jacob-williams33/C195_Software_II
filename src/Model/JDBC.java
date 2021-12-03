@@ -205,18 +205,14 @@ public class JDBC {
     public static void addCustomer(String customer_Name, String address, String postal_Code, String phone, Integer division_ID)
      {
         try {
-            String today = new Timestamp(new java.util.Date().getTime()).toString();
-            String sqladdcustomer = "INSERT INTO customers VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            String sqladdcustomer = "INSERT INTO customers VALUES (NULL, ?, ?, ?, ?, now(), 'user', now(), 'user', ?)";
             PreparedStatement psac = JDBC.getConnection().prepareStatement(sqladdcustomer);
             psac.setString(1, customer_Name);
             psac.setString(2, address);
             psac.setString(3, postal_Code);
             psac.setString(4, phone);
-            psac.setString(5, today);
-            psac.setString(6, "user");
-            psac.setString(7, today);
-            psac.setString(8, "other user");
-            psac.setInt(9, division_ID);
+            psac.setInt(5, division_ID);
             psac.execute();
 
 
@@ -246,10 +242,13 @@ public class JDBC {
     public static void deleteCustomer(int Customer_ID)
     {
         try {
-            //need to delete appts before this DELETE FROM appointments WHERE Customer_ID = (?)
+            String sqldeleteappointment = "DELETE FROM appointments WHERE Customer_ID = (?)";
             String sqldeletecustomerr = "DELETE FROM customers WHERE Customer_ID = (?)";
+            PreparedStatement psda = JDBC.getConnection().prepareStatement(sqldeleteappointment);
             PreparedStatement psdc = JDBC.getConnection().prepareStatement(sqldeletecustomerr);
+            psda.setInt(1, Customer_ID);
             psdc.setInt(1, Customer_ID);
+            psda.execute();
             psdc.execute();
 
 
@@ -263,8 +262,8 @@ public class JDBC {
                                       Integer customer_ID, Integer user_ID, Integer contact_ID)
     {
         try {
-            String today = new Timestamp(new java.util.Date().getTime()).toString();
-            String sqladdappointment = "INSERT INTO appointments VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            String sqladdappointment = "INSERT INTO appointments VALUES (NULL, ?, ?, ?, ?, ?, ?, now(), 'user', now(), 'user', ?, ?, ?)";
             PreparedStatement psaa  = JDBC.getConnection().prepareStatement(sqladdappointment);
             psaa.setString(1, title);
             psaa.setString(2, description);
@@ -272,14 +271,24 @@ public class JDBC {
             psaa.setString(4, type);
             psaa.setTimestamp(5, Timestamp.valueOf(start));
             psaa.setTimestamp(6, Timestamp.valueOf(end));
-            psaa.setString(7, today);
-            psaa.setString(8,"user");
-            psaa.setString(9, today);
-            psaa.setString(10,"user");
-            psaa.setInt(11, customer_ID);
-            psaa.setInt(12, user_ID);
-            psaa.setInt(13, contact_ID);
+            psaa.setInt(7, customer_ID);
+            psaa.setInt(8, user_ID);
+            psaa.setInt(9, contact_ID);
             psaa.execute();
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public static void deleteAppopintment(int Appointment_ID)
+    {
+        try {
+
+            String sqldeleteappointment = "DELETE FROM appointments WHERE Appointment_ID = (?)";
+            PreparedStatement psda = JDBC.getConnection().prepareStatement(sqldeleteappointment);
+            psda.setInt(1, Appointment_ID);
+            psda.execute();
 
 
         } catch (SQLException ex) {

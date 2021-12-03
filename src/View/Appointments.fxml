@@ -34,6 +34,7 @@
       <RadioButton layoutX="37.0" layoutY="87.0" mnemonicParsing="false" text="All Appts" />
       <RadioButton layoutX="117.0" layoutY="87.0" mnemonicParsing="false" text="Appts By Month" />
       <RadioButton layoutX="235.0" layoutY="87.0" mnemonicParsing="false" text="Appts By Week" />
+      <Button fx:id="deleteAppointment" layoutX="313.0" layoutY="408.0" mnemonicParsing="false" onAction="#onActionDeleteAppointment" prefHeight="50.0" prefWidth="115.0" text="Delete" />
    </children>
    <opaqueInsets>
       <Insets />

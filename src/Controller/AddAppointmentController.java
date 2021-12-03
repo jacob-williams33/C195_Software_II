@@ -61,9 +61,11 @@ public LocalDateTime LDTend() {
 
     public ObservableList<LocalTime> timeRanges() {
         ObservableList<LocalTime> comboTimes = FXCollections.observableArrayList();
-        LocalTime openBusiness = LocalTime.of(8, 0);
-        LocalTime closeBusiness = LocalTime.of(22, 0);
-        LocalTime t = LocalTime.of(8, 0);
+        LocalTime openBusinessEST = LocalTime.of(8, 0);
+        LocalTime closeBusinessEST = LocalTime.of(22, 0);
+        LocalTime openBusiness = openBusinessEST;
+        LocalTime closeBusiness = closeBusinessEST;
+        LocalTime t = openBusiness;
         Boolean inRange = t.isBefore(closeBusiness);
         while (inRange = true) {
             t = t.plusMinutes(30);
@@ -89,7 +91,7 @@ public LocalDateTime LDTend() {
         Users users = userIDCombo.getValue();
 
 
-        JDBC.addAppointment(appointment_title, description, location, type, start, end, contacts.getContact_ID(), customers.getCustomer_ID(), users.getUser_ID());
+        JDBC.addAppointment(appointment_title, description, location, type, start, end, customers.getCustomer_ID(), users.getUser_ID(), contacts.getContact_ID());
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/View/Appointments.fxml"));
         stage.setScene(new Scene(scene));

@@ -8,14 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AppointmentsController implements Initializable {
@@ -80,6 +79,23 @@ public class AppointmentsController implements Initializable {
         catch (NullPointerException e) {
 
         }
+    }
+
+    @FXML
+    void onActionDeleteAppointment(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText("This will permanently delete the selected appointment");
+        alert.setContentText("Do you wish to continue?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            JDBC.deleteAppopintment(appointmentsTable.getSelectionModel().getSelectedItem().getAppointment_ID());
+        }
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/View/Appointments.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
     @FXML
     void onActionMainMenuA(ActionEvent event) throws IOException {
