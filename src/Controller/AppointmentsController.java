@@ -70,7 +70,7 @@ public class AppointmentsController implements Initializable {
             loader.load();
 
             UpdateAppointmentController upAppCont = loader.getController();
-            upAppCont.sendAppointment(appointmentsTable.getSelectionModel().getSelectedItem());
+            upAppCont.populateSelectedAppointment(appointmentsTable.getSelectionModel().getSelectedItem());
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             Parent scene = loader.getRoot();
             stage.setScene(new Scene(scene));
@@ -90,7 +90,7 @@ public class AppointmentsController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            JDBC.deleteAppopintment(appointmentsTable.getSelectionModel().getSelectedItem().getAppointment_ID());
+            JDBC.deleteAppointment(appointmentsTable.getSelectionModel().getSelectedItem().getAppointment_ID());
         }
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/View/Appointments.fxml"));

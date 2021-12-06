@@ -256,7 +256,7 @@ public class JDBC {
             ex.printStackTrace();
         }
     }
-    //need to fix date and created by to incorporate correct user and date
+
     public static void addAppointment(String title, String description, String location,
                                       String type, LocalDateTime start, LocalDateTime end,
                                       Integer customer_ID, Integer user_ID, Integer contact_ID)
@@ -281,7 +281,33 @@ public class JDBC {
             ex.printStackTrace();
         }
     }
-    public static void deleteAppopintment(int Appointment_ID)
+    public static void updateAppointment(String title, String description, String location,
+                                         String type, LocalDateTime start, LocalDateTime end,
+                                         Integer customer_ID, Integer user_ID, Integer contact_ID)
+    {
+        try {
+
+            String sqlupdateappointment = "UPDATE appointments " +
+                    "SET Title=?, Description=?, Location=?, Type=?, Start=?, End=?, Customer_ID=?, User_ID=?, Contact_ID=?," +
+                    "WHERE Customer_ID=?";
+            PreparedStatement psua  = JDBC.getConnection().prepareStatement(sqlupdateappointment);
+            psua.setString(1, title);
+            psua.setString(2, description);
+            psua.setString(3, location);
+            psua.setString(4, type);
+            psua.setTimestamp(5, Timestamp.valueOf(start));
+            psua.setTimestamp(6, Timestamp.valueOf(end));
+            psua.setInt(7, customer_ID);
+            psua.setInt(8, user_ID);
+            psua.setInt(9, contact_ID);
+            psua.execute();
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public static void deleteAppointment(int Appointment_ID)
     {
         try {
 

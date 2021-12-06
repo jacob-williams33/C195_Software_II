@@ -36,7 +36,7 @@
             <TextField fx:id="upAppID" disable="true" text="Disabled - Auto Generated" GridPane.columnIndex="1" GridPane.columnSpan="3" />
             <TextField fx:id="upAppTitle" prefWidth="421.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
             <TextField fx:id="upAppDesc" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-            <TextField fx:id="location" prefWidth="338.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+            <TextField fx:id="upAppLocation" prefWidth="338.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" />
         
 
             <Label text="Type" GridPane.rowIndex="5" />
@@ -45,13 +45,13 @@
             <Label text="End" GridPane.rowIndex="7" />
             <Label text="Customer_ID" GridPane.rowIndex="8" />
             <Label text="User_ID" GridPane.rowIndex="9" />
-            <ComboBox fx:id="upAppContact" prefWidth="150.0" promptText="Select..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8" />
-            <TextField GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="9" />
-            <TextField fx:id="upAppType" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-            <DatePicker promptText="Select Date" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <ComboBox prefWidth="150.0" promptText="Select Start Time..." GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <ComboBox prefWidth="150.0" promptText="Select End Time...." GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <ComboBox fx:id="upAppContact" prefHeight="25.0" prefWidth="198.0" promptText="Select Appointment Contact..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <DatePicker fx:id="upAppDate" promptText="Select Date" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox fx:id="upAppStart" prefWidth="150.0" promptText="Select Start Time..." GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <ComboBox fx:id="upAppEnd" prefWidth="150.0" promptText="Select End Time...." GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <ComboBox fx:id="upAppType" prefHeight="25.0" prefWidth="198.0" promptText="Select Appointment Type..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="upAppCustomerID" prefHeight="25.0" prefWidth="194.0" promptText="Select Customer ID..." GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <ComboBox fx:id="upAppUserID" prefHeight="25.0" prefWidth="193.0" promptText="Select User ID..." GridPane.columnIndex="1" GridPane.rowIndex="9" />
          </children>
       </GridPane>
       <Label layoutX="26.0" layoutY="14.0" prefHeight="40.0" prefWidth="351.0" text="Update Appointment">

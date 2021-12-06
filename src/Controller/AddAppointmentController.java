@@ -54,7 +54,7 @@ public LocalDateTime LDTend() {
 
     public ObservableList<String> createTypeList() {
         ObservableList<String> types = FXCollections.observableArrayList();
-        types.addAll("Initial Intake", "Follow Up", "Med Check", "Brain Dump", "Process Discussion", "Termination");
+        types.addAll("Initial Intake", "Planning Session", "Follow Up", "Med Check", "Brain Dump", "Process Discussion", "Debriefing", "Termination");
         return types;
     }
 

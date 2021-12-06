@@ -1,7 +1,8 @@
 package Controller;
 
-import Model.Apppointments;
-import Model.Contacts;
+import Model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,41 +11,129 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class UpdateAppointmentController implements Initializable {
+
 
 
     Stage stage;
     Parent scene;
 
     @FXML
-    private TextField upAppID;
+    public TextField upAppID;
 
     @FXML
-    private TextField upAppTitle;
+    public TextField upAppTitle;
 
     @FXML
-    private TextField upAppDesc;
+    public TextField upAppDesc;
 
     @FXML
-    private TextField location;
+    public TextField upAppLocation;
 
     @FXML
-    private ComboBox<Contacts> upAppContact;
+    public ComboBox<Contacts> upAppContact;
 
     @FXML
-    private TextField upAppType;
+    public ComboBox upAppType;
+
+    @FXML
+    public DatePicker upAppDate;
+
+    @FXML
+    public ComboBox<LocalTime> upAppStart;
+
+    @FXML
+    public ComboBox<LocalTime> upAppEnd;
+
+    @FXML
+    public ComboBox<Customers> upAppCustomerID;
+
+    @FXML
+    public ComboBox<Users> upAppUserID;
+
+    public LocalDateTime LDTstart() {
+        LocalTime startTime = upAppStart.getSelectionModel().getSelectedItem();
+        LocalDate appointmentDate = upAppDate.getValue();
+        LocalDateTime LDTstart = LocalDateTime.of(appointmentDate, startTime);
+        return  LDTstart;
+    }
+    public LocalDateTime LDTend() {
+        LocalTime endTime = upAppEnd.getSelectionModel().getSelectedItem();
+        LocalDate appointmentDate = upAppDate.getValue();
+        LocalDateTime LDTend = LocalDateTime.of(appointmentDate, endTime);
+        return LDTend;
+    }
+
+    public ObservableList<String> createTypeList() {
+        ObservableList<String> types = FXCollections.observableArrayList();
+        types.addAll("Initial Intake", "Planning Session", "Follow Up", "Med Check", "Brain Dump", "Process Discussion", "Debriefing", "Termination");
+        return types;
+    }
+
+    public ObservableList<LocalTime> timeRanges() {
+        ObservableList<LocalTime> comboTimes = FXCollections.observableArrayList();
+        LocalTime openBusinessEST = LocalTime.of(8, 0);
+        LocalTime closeBusinessEST = LocalTime.of(22, 0);
+        LocalTime openBusiness = openBusinessEST;
+        LocalTime closeBusiness = closeBusinessEST;
+        LocalTime t = openBusiness;
+        Boolean inRange = t.isBefore(closeBusiness);
+        while (inRange = true) {
+            t = t.plusMinutes(30);
+            comboTimes.add(t);
+            if (t == closeBusiness) {
+                break;
+            }
+        }
+        return comboTimes;
+    }
 
 
+    public void populateSelectedAppointment(Apppointments apppointments) {
 
 
+        upAppID.setText(String.valueOf(apppointments.getAppointment_ID()));
+        upAppTitle.setText(apppointments.getTitle());
+        upAppDesc.setText(apppointments.getDescription());
+        upAppLocation.setText(apppointments.getLocation());
 
+        for (Contacts c : upAppContact.getItems()) {
+            if (apppointments.getContact_ID() == c.getContact_ID()) {
+                upAppContact.setValue(c);
+                break;
+            }
+        }
+        upAppType.setValue(apppointments.getType());
+        upAppDate.setValue(apppointments.getStart().toLocalDate());
+        upAppStart.setValue(apppointments.getStart().toLocalTime());
+        upAppEnd.setValue(apppointments.getStart().toLocalTime());
+
+        for (Customers customers : upAppCustomerID.getItems()) {
+            if (apppointments.getCustomer_ID() == customers.getCustomer_ID()) {
+                upAppCustomerID.setValue(customers);
+                break;
+            }
+        }
+
+        for (Users users : upAppUserID.getItems()) {
+            if (apppointments.getUser_ID() == users.getUser_ID()){
+                upAppUserID.setValue(users);
+                break;
+            }
+        }
+
+    }
 
     @FXML
     void onActionCancelUpdateAppointment(ActionEvent event) throws IOException {
@@ -53,22 +142,29 @@ public class UpdateAppointmentController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
-    public void sendAppointment(Apppointments apppointments) {
-//        Appointment_ID = appointment_ID;
-//        Title = title;
-//        Description = description;
-//        Location = location;
-//        Type = type;
-//        Start = start;
-//        End = end;
-//        Customer_ID = customer_ID;
-//        User_ID = user_ID;
-//        Contact_ID = contact_ID;
 
-    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        upAppType.setVisibleRowCount(5);
+        upAppType.setPromptText("Select Appointment Type");
+        upAppType.setItems(createTypeList());
+        upAppStart.setVisibleRowCount(5);
+        upAppStart.setPromptText("Select Start Time");
+        upAppStart.setItems(timeRanges());
+        upAppEnd.setVisibleRowCount(5);
+        upAppEnd.setPromptText("Select End Time");
+        upAppEnd.setItems(timeRanges());
+        upAppContact.setVisibleRowCount(5);
+        upAppContact.setPromptText("Select Contact...");
+        upAppContact.setItems(JDBC.getAllContacts());
+        upAppCustomerID.setVisibleRowCount(5);
+        upAppCustomerID.setPromptText("Select Customer");
+        upAppCustomerID.setItems(JDBC.getAllCustomers());
+        upAppUserID.setVisibleRowCount(5);
+        upAppUserID.setPromptText("Select User");
+        upAppUserID.setItems(JDBC.getAllUsers());
 
     }
 }
