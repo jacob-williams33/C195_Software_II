@@ -9,15 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.*;
+import java.time.chrono.ChronoLocalDateTime;
+import java.time.chrono.ChronoZonedDateTime;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
@@ -144,26 +143,70 @@ public class UpdateAppointmentController implements Initializable {
 
     }
 
+    public Boolean errorCheck(String Appointment_ID) {
+        ObservableList<Apppointments> allAppointments = JDBC.getAllAppointments();
+
+        for (Apppointments a : allAppointments) {
+
+            ZoneId localZDT = ZoneId.of(TimeZone.getDefault().getID());
+            ZonedDateTime convertedStart = a.getStart().atZone(localZDT);
+            ZonedDateTime convertedEnd = a.getEnd().atZone(localZDT);
+
+            ZonedDateTime ZDTstart = LDTstart().atZone(localZDT);
+            ZonedDateTime ZDTend = LDTend().atZone(localZDT);
+
+            if (convertedStart.isAfter(ZDTstart)
+                    && convertedStart.isBefore(ZDTend)) {
+                return false;
+            }
+            if (convertedEnd.isAfter(ZDTstart)
+                    && convertedEnd.isBefore(ZDTend)) {
+                return false;
+            }
+        }
+        System.out.println("Good to Go");
+        return true;
+    }
+
+
     @FXML
     void onActionSaveAppointment(ActionEvent event) throws IOException {
-        String appointment_title= upAppTitle.getText();
-        String description = upAppDesc.getText();
-        String location = upAppLocation.getText();
-        String type = upAppType.getValue();
-        LocalDateTime start = LDTstart();
-        LocalDateTime end = LDTend();
-        Contacts contacts = upAppContact.getValue();
-        Customers customers = upAppCustomerID.getValue();
-        Users users = upAppUserID.getValue();
-        String appointments = upAppID.getText();
+        boolean gtg = errorCheck(upAppID.getText());
+        if (gtg) {
+
+            String appointment_title = upAppTitle.getText();
+            String description = upAppDesc.getText();
+            String location = upAppLocation.getText();
+            String type = upAppType.getValue();
+            LocalDateTime start = LDTstart();
+            LocalDateTime end = LDTend();
+            Contacts contacts = upAppContact.getValue();
+            Customers customers = upAppCustomerID.getValue();
+            Users users = upAppUserID.getValue();
+            String appointments = upAppID.getText();
+
+            LocalTime openBusinessEST = LocalTime.of(8, 0);
+            LocalTime closeBusinessEST = LocalTime.of(22, 0);
+
+            ZoneId EST = ZoneId.of("America/New_York");
+            ZoneId localZDT = ZoneId.of(TimeZone.getDefault().getID());
+
+            ZonedDateTime openZDT = ZonedDateTime.of(LocalDate.now(), openBusinessEST, EST);
+            ZonedDateTime closeZDT = ZonedDateTime.of(LocalDate.now(), closeBusinessEST, EST);
+
+            ZonedDateTime openBusiness = openZDT.withZoneSameInstant(localZDT);
+            ZonedDateTime closeBusiness = closeZDT.withZoneSameInstant(localZDT);
 
 
-        JDBC.updateAppointment(appointment_title, description, location, type, start, end, customers.getCustomer_ID(), users.getUser_ID(), contacts.getContact_ID(), appointments);
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/Appointments.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
-
+            JDBC.updateAppointment(appointment_title, description, location, type, start, end, customers.getCustomer_ID(), users.getUser_ID(), contacts.getContact_ID(), appointments);
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/View/Appointments.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+        else {
+            System.out.println("Broken");
+        }
     }
 
     @FXML

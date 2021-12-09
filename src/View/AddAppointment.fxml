@@ -33,7 +33,7 @@
             <Label text="Description" GridPane.rowIndex="2" />
             <Label text="Location" GridPane.rowIndex="3" />
             <Label text="Contact" GridPane.rowIndex="4" />
-            <TextField disable="true" text="Disabled - Auto Generated" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+            <TextField fx:id="addAppID" disable="true" text="Disabled - Auto Generated" GridPane.columnIndex="1" GridPane.columnSpan="2" />
             <TextField fx:id="addAppTitleTXT" prefWidth="421.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
             <TextField fx:id="addAppDescTXT" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
             <TextField fx:id="addAppLocTXT" prefWidth="338.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />

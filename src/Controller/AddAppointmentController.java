@@ -23,6 +23,7 @@ import java.util.TimeZone;
 
 public class AddAppointmentController implements Initializable {
 
+    public TextField addAppID;
     public TextField addAppTitleTXT;
     public TextField addAppDescTXT;
     public TextField addAppLocTXT;
@@ -85,12 +86,39 @@ public LocalDateTime LDTend() {
         }
         return comboTimes;
     }
+    public Boolean errorCheck(String Appointment_ID) {
+        ObservableList<Apppointments> allAppointments = JDBC.getAllAppointments();
+
+        for (Apppointments a : allAppointments) {
+
+            ZoneId localZDT = ZoneId.of(TimeZone.getDefault().getID());
+            ZonedDateTime convertedStart = a.getStart().atZone(localZDT);
+            ZonedDateTime convertedEnd = a.getEnd().atZone(localZDT);
+
+            ZonedDateTime ZDTstart = LDTstart().atZone(localZDT);
+            ZonedDateTime ZDTend = LDTend().atZone(localZDT);
+
+            if (convertedStart.isAfter(ZDTstart)
+                    && convertedStart.isBefore(ZDTend)) {
+                return false;
+            }
+            if (convertedEnd.isAfter(ZDTstart)
+                    && convertedEnd.isBefore(ZDTend)) {
+                return false;
+            }
+        }
+        System.out.println("Good to Go");
+        return true;
+    }
 
 
 
     @FXML
     void onActionSaveAppointment(ActionEvent event) throws IOException {
-        String appointment_title= addAppTitleTXT.getText();
+    Boolean gtg = errorCheck(addAppID.getText());
+    if (gtg) {
+
+        String appointment_title = addAppTitleTXT.getText();
         String description = addAppDescTXT.getText();
         String location = addAppLocTXT.getText();
         String type = typeCombo.getValue();
@@ -102,10 +130,14 @@ public LocalDateTime LDTend() {
 
 
         JDBC.addAppointment(appointment_title, description, location, type, start, end, customers.getCustomer_ID(), users.getUser_ID(), contacts.getContact_ID());
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/View/Appointments.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+    }
+        else {
+        System.out.println("Broken");
+    }
 
     }
 
