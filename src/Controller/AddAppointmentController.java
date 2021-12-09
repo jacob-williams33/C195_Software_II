@@ -17,10 +17,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 public class AddAppointmentController implements Initializable {
 
@@ -63,19 +62,30 @@ public LocalDateTime LDTend() {
         ObservableList<LocalTime> comboTimes = FXCollections.observableArrayList();
         LocalTime openBusinessEST = LocalTime.of(8, 0);
         LocalTime closeBusinessEST = LocalTime.of(22, 0);
-        LocalTime openBusiness = openBusinessEST;
-        LocalTime closeBusiness = closeBusinessEST;
-        LocalTime t = openBusiness;
+
+        ZoneId EST = ZoneId.of("America/New_York");
+        ZoneId localZDT = ZoneId.of(TimeZone.getDefault().getID());
+
+        ZonedDateTime openZDT = ZonedDateTime.of(LocalDate.now(), openBusinessEST, EST);
+        ZonedDateTime closeZDT = ZonedDateTime.of(LocalDate.now(), closeBusinessEST, EST);
+
+        ZonedDateTime openBusiness = openZDT.withZoneSameInstant(localZDT);
+        ZonedDateTime closeBusiness = closeZDT.withZoneSameInstant(localZDT);
+
+
+        ZonedDateTime t = openBusiness.minusMinutes(30);
+
         Boolean inRange = t.isBefore(closeBusiness);
         while (inRange = true) {
             t = t.plusMinutes(30);
-            comboTimes.add(t);
-            if (t == closeBusiness) {
+            comboTimes.add(LocalTime.from(t));
+            if ((t.equals(closeBusiness) || t.isAfter(closeBusiness))) {
                 break;
             }
         }
         return comboTimes;
     }
+
 
 
     @FXML
