@@ -59,7 +59,7 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Button layoutX="135.0" layoutY="390.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" text="Save">
+      <Button layoutX="135.0" layoutY="390.0" mnemonicParsing="false" onAction="#onActionSaveAppointment" prefHeight="30.0" prefWidth="125.0" text="Save">
          <font>
             <Font size="27.0" />
          </font>

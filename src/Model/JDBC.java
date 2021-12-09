@@ -283,13 +283,14 @@ public class JDBC {
     }
     public static void updateAppointment(String title, String description, String location,
                                          String type, LocalDateTime start, LocalDateTime end,
-                                         Integer customer_ID, Integer user_ID, Integer contact_ID)
+                                         Integer customer_ID, Integer user_ID, Integer contact_ID, String appointment_ID)
     {
         try {
 
             String sqlupdateappointment = "UPDATE appointments " +
-                    "SET Title=?, Description=?, Location=?, Type=?, Start=?, End=?, Customer_ID=?, User_ID=?, Contact_ID=?," +
-                    "WHERE Customer_ID=?";
+                    "SET Title=?, Description=?, Location=?, Type=?, Start=?, End=?, " +
+                    "Customer_ID=?, User_ID=?, Contact_ID=? WHERE Appointment_ID=?";
+//            Division_ID=? WHERE Customer_ID=?"
             PreparedStatement psua  = JDBC.getConnection().prepareStatement(sqlupdateappointment);
             psua.setString(1, title);
             psua.setString(2, description);
@@ -300,6 +301,7 @@ public class JDBC {
             psua.setInt(7, customer_ID);
             psua.setInt(8, user_ID);
             psua.setInt(9, contact_ID);
+            psua.setString(10, appointment_ID);
             psua.execute();
 
 

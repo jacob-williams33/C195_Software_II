@@ -44,7 +44,7 @@ public class UpdateAppointmentController implements Initializable {
     public ComboBox<Contacts> upAppContact;
 
     @FXML
-    public ComboBox upAppType;
+    public ComboBox<String> upAppType;
 
     @FXML
     public DatePicker upAppDate;
@@ -141,6 +141,28 @@ public class UpdateAppointmentController implements Initializable {
                 break;
             }
         }
+
+    }
+
+    @FXML
+    void onActionSaveAppointment(ActionEvent event) throws IOException {
+        String appointment_title= upAppTitle.getText();
+        String description = upAppDesc.getText();
+        String location = upAppLocation.getText();
+        String type = upAppType.getValue();
+        LocalDateTime start = LDTstart();
+        LocalDateTime end = LDTend();
+        Contacts contacts = upAppContact.getValue();
+        Customers customers = upAppCustomerID.getValue();
+        Users users = upAppUserID.getValue();
+        String appointments = upAppID.getText();
+
+
+        JDBC.updateAppointment(appointment_title, description, location, type, start, end, customers.getCustomer_ID(), users.getUser_ID(), contacts.getContact_ID(), appointments);
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/View/Appointments.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
 
