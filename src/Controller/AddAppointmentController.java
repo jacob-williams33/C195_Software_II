@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -89,6 +86,7 @@ public LocalDateTime LDTend() {
     public Boolean errorCheck(String Appointment_ID) {
         ObservableList<Apppointments> allAppointments = JDBC.getAllAppointments();
 
+
         for (Apppointments a : allAppointments) {
 
             ZoneId localZDT = ZoneId.of(TimeZone.getDefault().getID());
@@ -100,13 +98,52 @@ public LocalDateTime LDTend() {
 
             if (convertedStart.isAfter(ZDTstart)
                     && convertedStart.isBefore(ZDTend)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Warning");
+                alert.setHeaderText("Appointment Conflicts With Another Appointment");
+                alert.setContentText("Select New Time");
+                return false;
+            }
+            if (convertedStart.isEqual(ZDTstart)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Warning");
+                alert.setHeaderText("Appointment Conflicts With Another Appointment");
+                alert.setContentText("Select New Time");
                 return false;
             }
             if (convertedEnd.isAfter(ZDTstart)
                     && convertedEnd.isBefore(ZDTend)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Warning");
+                alert.setHeaderText("Appointment Conflicts With Another Appointment");
+                alert.setContentText("Select New Time");
                 return false;
             }
+            if (convertedEnd.isEqual(ZDTend)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Warning");
+                alert.setHeaderText("Appointment Conflicts With Another Appointment");
+                alert.setContentText("Select New Time");
+                return false;
+            }
+
         }
+
+        if (LDTstart().isAfter(LDTend())) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Start Time Cannot Be Before End Time");
+            alert.setContentText("Select New Time");
+            return false;
+        }
+        if (LDTend().isBefore(LDTstart())) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Warning");
+            alert.setHeaderText("End Time Cannot Be Before Start Time");
+            alert.setContentText("Select New Time");
+            return false;
+        }
+
         System.out.println("Good to Go");
         return true;
     }

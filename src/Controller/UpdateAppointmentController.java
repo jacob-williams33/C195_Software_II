@@ -146,24 +146,85 @@ public class UpdateAppointmentController implements Initializable {
     public Boolean errorCheck(String Appointment_ID) {
         ObservableList<Apppointments> allAppointments = JDBC.getAllAppointments();
 
+        if (LDTstart().isAfter(LDTend())) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Start Time Cannot Be Before End Time");
+            alert.setContentText("Select New Time");
+            alert.showAndWait();
+            return false;
+        }
+        if (LDTend().isBefore(LDTstart())) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Warning");
+            alert.setHeaderText("End Time Cannot Be Before Start Time");
+            alert.setContentText("Select New Time");
+            alert.showAndWait();
+            return false;
+        }
+
         for (Apppointments a : allAppointments) {
 
-            ZoneId localZDT = ZoneId.of(TimeZone.getDefault().getID());
-            ZonedDateTime convertedStart = a.getStart().atZone(localZDT);
-            ZonedDateTime convertedEnd = a.getEnd().atZone(localZDT);
-
-            ZonedDateTime ZDTstart = LDTstart().atZone(localZDT);
-            ZonedDateTime ZDTend = LDTend().atZone(localZDT);
+//            ZoneId localZDT = ZoneId.of(TimeZone.getDefault().getID());
+//            ZonedDateTime convertedStart = a.getStart().atZone(localZDT);
+//            ZonedDateTime convertedEnd = a.getEnd().atZone(localZDT);
+//
+//            ZonedDateTime ZDTstart = LDTstart().atZone(localZDT);
+//            ZonedDateTime ZDTend = LDTend().atZone(localZDT);
+            LocalDateTime convertedStart = a.getStart();
+            LocalDateTime ZDTstart = LDTstart();
+            LocalDateTime convertedEnd = a.getEnd();
+            LocalDateTime ZDTend = LDTend();
 
             if (convertedStart.isAfter(ZDTstart)
                     && convertedStart.isBefore(ZDTend)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Warning: 1");
+                alert.setHeaderText("Appointment Conflicts With Another Appointment");
+                alert.setContentText("Select New Time");
+                alert.showAndWait();
+                return false;
+            }
+            if (convertedStart.isEqual(ZDTstart)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Warning: 2");
+                alert.setHeaderText("Appointment Conflicts With Another Appointment");
+                alert.setContentText("Select New Time");
+                alert.showAndWait();
                 return false;
             }
             if (convertedEnd.isAfter(ZDTstart)
                     && convertedEnd.isBefore(ZDTend)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Warning: 3");
+                alert.setHeaderText("Appointment Conflicts With Another Appointment");
+                alert.setContentText("Select New Time");
+                alert.showAndWait();
                 return false;
             }
+            if (convertedEnd.isEqual(ZDTend)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Warning: 4");
+                alert.setHeaderText("Appointment Conflicts With Another Appointment");
+                alert.setContentText("Select New Time");
+                alert.showAndWait();
+                return false;
+            }
+            if (convertedStart.isBefore(ZDTstart)
+                    && convertedEnd.isAfter(ZDTend)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Warning: 5");
+                alert.setHeaderText("Appointment Conflicts With Another Appointment");
+                alert.setContentText("Select New Time");
+                alert.showAndWait();
+                return false;
+            }
+
+
         }
+
+
+
         System.out.println("Good to Go");
         return true;
     }

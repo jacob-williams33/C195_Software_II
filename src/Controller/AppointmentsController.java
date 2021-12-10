@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Apppointments;
 import Model.JDBC;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,8 @@ import java.util.ResourceBundle;
 public class AppointmentsController implements Initializable {
     Stage stage;
     Parent scene;
+
+    ObservableList<Apppointments> appointments;
 
     @FXML
     public TableView<Apppointments> appointmentsTable;
@@ -53,6 +56,31 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     public TableColumn<Apppointments, Integer> contactCOL;
+
+    @FXML
+    public RadioButton allAppButton;
+
+    @FXML
+    public RadioButton appByMonthButton;
+
+    @FXML
+    public RadioButton appByWeekButton;
+
+    @FXML
+    public void onActionAppointmentFilters(ActionEvent event) throws IOException {
+        if (allAppButton.isSelected()) {
+            appointments = JDBC.getAllAppointments();
+            appointmentsTable.setItems(appointments);
+        }
+        else if (appByMonthButton.isSelected()) {
+            appointments = JDBC.getAppointmentsByMonth();
+            appointmentsTable.setItems(appointments);
+        }
+        else if (appByWeekButton.isSelected()) {
+            appointments = JDBC.getAppointmentsByMonth();
+            appointmentsTable.setItems(appointments);
+        }
+    }
 
     @FXML
     void onActionAddAppointment(ActionEvent event) throws IOException {
@@ -115,6 +143,9 @@ public class AppointmentsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
+
+        allAppButton.setSelected(true);
+        allAppButton.requestFocus();
         appointmentsTable.setItems(JDBC.getAllAppointments());
         apptIDCOL.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
         titleCOL.setCellValueFactory(new PropertyValueFactory<>("Title"));

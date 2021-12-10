@@ -48,7 +48,7 @@ public class LogInController implements Initializable {
                         password.setText(myRB.getString("Password"));
                         logIn.setText(myRB.getString("LogIn"));
                         location.setText(myRB.getString("TimeZone"));
-                        timeZone.setText(ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.ENGLISH));
+                        timeZone.setText(ZoneId.systemDefault().toString());
 
     }
 }

@@ -87,6 +87,33 @@ public class JDBC {
         return aList;
 
     }
+    public static ObservableList<Apppointments> getAppointmentsByMonth() {
+        ObservableList<Apppointments> aList = FXCollections.observableArrayList();
+        try {
+            String sql = "SELECT * FROM appointments WHERE MONTH(Start) = MONTH(current_date())";
+            PreparedStatement psam = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = psam.executeQuery();
+
+            while (rs.next()) {
+                int Appointment_ID = rs.getInt("Appointment_ID");
+                String Title = rs.getString("Title");
+                String Description = rs.getString("Description");
+                String Location = rs.getString("Location");
+                String Type = rs.getString("Type");
+                LocalDateTime Start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime End = rs.getTimestamp("End").toLocalDateTime();
+                int Customer_ID = rs.getInt("Customer_ID");
+                int User_ID = rs.getInt("User_ID");
+                int Contact_ID = rs.getInt("Contact_ID");
+                Apppointments a = new Apppointments(Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID);
+                aList.add(a);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return aList;
+    }
     public static ObservableList<Customers> getAllCustomers() {
         ObservableList<Customers> cList = FXCollections.observableArrayList();
         try {
@@ -201,7 +228,7 @@ public class JDBC {
         return uList;
 
     }
-    //need to fix date and created by to incorporate correct user and date
+
     public static void addCustomer(String customer_Name, String address, String postal_Code, String phone, Integer division_ID)
      {
         try {
