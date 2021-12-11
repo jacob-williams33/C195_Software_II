@@ -14,9 +14,9 @@
       </Label>
       <TableView fx:id="appointmentsTable" layoutX="37.0" layoutY="140.0" prefHeight="245.0" prefWidth="800.0">
         <columns>
-            <TableColumn fx:id="apptIDCOL" prefWidth="45.0" text="Appt ID" />
-            <TableColumn fx:id="titleCOL" prefWidth="46.20001220703125" text="Title" />
-            <TableColumn fx:id="descriptionCOL" prefWidth="70.80001831054688" text="Description" />
+            <TableColumn fx:id="apptIDCOL" prefWidth="57.0" text="Appt ID" />
+            <TableColumn fx:id="titleCOL" prefWidth="53.0" text="Title" />
+            <TableColumn fx:id="descriptionCOL" prefWidth="53.0" text="Description" />
             <TableColumn fx:id="locationCOL" prefWidth="71.60000610351562" text="Location" />
             <TableColumn fx:id="contactCOL" prefWidth="75.20001220703125" text="Contact" />
             <TableColumn fx:id="typeCOL" prefWidth="56.0" text="Type" />
