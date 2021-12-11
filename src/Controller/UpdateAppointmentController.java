@@ -146,6 +146,88 @@ public class UpdateAppointmentController implements Initializable {
     public Boolean errorCheck(String Appointment_ID) {
         ObservableList<Apppointments> allAppointments = JDBC.getAllAppointments();
 
+        if (upAppTitle.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Cell");
+            alert.setHeaderText("Title Cell is Blank");
+            alert.setContentText("Input Appointment Title");
+            alert.showAndWait();
+            return false;
+        }
+        if (upAppDesc.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Cell");
+            alert.setHeaderText("Description Cell is Blank");
+            alert.setContentText("Input Appointment Description");
+            alert.showAndWait();
+            return false;
+        }
+        if (upAppLocation.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Cell");
+            alert.setHeaderText("Location Cell is Blank");
+            alert.setContentText("Input Appointment Location");
+            alert.showAndWait();
+            return false;
+        }
+        if (upAppContact.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Box");
+            alert.setHeaderText("Contact box is Blank");
+            alert.setContentText("Select Appointment Contact");
+            alert.showAndWait();
+            return false;
+        }
+        if (upAppType.getSelectionModel().isEmpty())  {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Box");
+            alert.setHeaderText("Type box is Blank");
+            alert.setContentText("Select Appointment Type");
+            alert.showAndWait();
+            return false;
+        }
+
+        if (upAppDate.getChronology().equals(null)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Box");
+            alert.setHeaderText("Appointment Date is Blank");
+            alert.setContentText("Select Appointment Date");
+            alert.showAndWait();
+            return false;
+        }
+        if (upAppStart.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Box");
+            alert.setHeaderText("Appointment Start Time is Blank");
+            alert.setContentText("Select Appointment Start Time");
+            alert.showAndWait();
+            return false;
+        }
+        if (upAppEnd.getSelectionModel().isEmpty())  {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Box");
+            alert.setHeaderText("Appointment End Time is Blank");
+            alert.setContentText("Select Appointment End Time");
+            alert.showAndWait();
+            return false;
+        }
+        if (upAppCustomerID.getSelectionModel().isEmpty())  {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Box");
+            alert.setHeaderText("Customer ID box is Blank");
+            alert.setContentText("Select Customer ID for Appointment");
+            alert.showAndWait();
+            return false;
+        }
+        if (upAppUserID.getSelectionModel().isEmpty())  {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Box");
+            alert.setHeaderText("User ID box is Blank");
+            alert.setContentText("Select User ID");
+            alert.showAndWait();
+            return false;
+        }
+
         if (LDTstart().isAfter(LDTend())) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Warning");
@@ -165,12 +247,7 @@ public class UpdateAppointmentController implements Initializable {
 
         for (Apppointments a : allAppointments) {
 
-//            ZoneId localZDT = ZoneId.of(TimeZone.getDefault().getID());
-//            ZonedDateTime convertedStart = a.getStart().atZone(localZDT);
-//            ZonedDateTime convertedEnd = a.getEnd().atZone(localZDT);
-//
-//            ZonedDateTime ZDTstart = LDTstart().atZone(localZDT);
-//            ZonedDateTime ZDTend = LDTend().atZone(localZDT);
+
             LocalDateTime convertedStart = a.getStart();
             LocalDateTime ZDTstart = LDTstart();
             LocalDateTime convertedEnd = a.getEnd();
@@ -178,7 +255,7 @@ public class UpdateAppointmentController implements Initializable {
 
             if (convertedStart.isAfter(ZDTstart)
                     && convertedStart.isBefore(ZDTend)) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Warning: 1");
                 alert.setHeaderText("Appointment Conflicts With Another Appointment");
                 alert.setContentText("Select New Time");
@@ -186,7 +263,7 @@ public class UpdateAppointmentController implements Initializable {
                 return false;
             }
             if (convertedStart.isEqual(ZDTstart)) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Warning: 2");
                 alert.setHeaderText("Appointment Conflicts With Another Appointment");
                 alert.setContentText("Select New Time");
@@ -195,7 +272,7 @@ public class UpdateAppointmentController implements Initializable {
             }
             if (convertedEnd.isAfter(ZDTstart)
                     && convertedEnd.isBefore(ZDTend)) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Warning: 3");
                 alert.setHeaderText("Appointment Conflicts With Another Appointment");
                 alert.setContentText("Select New Time");
@@ -203,7 +280,7 @@ public class UpdateAppointmentController implements Initializable {
                 return false;
             }
             if (convertedEnd.isEqual(ZDTend)) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Warning: 4");
                 alert.setHeaderText("Appointment Conflicts With Another Appointment");
                 alert.setContentText("Select New Time");
@@ -212,20 +289,15 @@ public class UpdateAppointmentController implements Initializable {
             }
             if (convertedStart.isBefore(ZDTstart)
                     && convertedEnd.isAfter(ZDTend)) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Warning: 5");
                 alert.setHeaderText("Appointment Conflicts With Another Appointment");
                 alert.setContentText("Select New Time");
                 alert.showAndWait();
                 return false;
             }
-
-
         }
 
-
-
-        System.out.println("Good to Go");
         return true;
     }
 
