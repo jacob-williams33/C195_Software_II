@@ -1,8 +1,6 @@
 package Controller;
 
-import Model.Countries;
-import Model.Divisions;
-import Model.JDBC;
+import Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -12,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -34,21 +33,77 @@ public class AddCustomerController implements Initializable {
     Stage stage;
     Parent scene;
 
+    public Boolean errorCheck(String Appointment_ID) {
+        ObservableList<Customers> allCustomers = JDBC.getAllCustomers();
 
+        if (addCustomerNameTXT.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Cell");
+            alert.setHeaderText("Customer Name is Blank");
+            alert.setContentText("Input Customer Name");
+            alert.showAndWait();
+            return false;
+        }
+        if (addAddressTXT.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Cell");
+            alert.setHeaderText("Address is Blank");
+            alert.setContentText("Input Customer Address");
+            alert.showAndWait();
+            return false;
+        }
+        if (addPostalCodeTXT.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Cell");
+            alert.setHeaderText("Postal Code is Blank");
+            alert.setContentText("Input Customer Postal Code");
+            alert.showAndWait();
+            return false;
+        }
+        if (addPhoneTXT.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Cell");
+            alert.setHeaderText("Phone Number is Blank");
+            alert.setContentText("Input Customer Phone Number");
+            alert.showAndWait();
+            return false;
+        }
+        if (countryCombo.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Box");
+            alert.setHeaderText("Country Box is Blank");
+            alert.setContentText("Select Country");
+            alert.showAndWait();
+            return false;
+        }
+        if (divisionCombo.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Blank Box");
+            alert.setHeaderText("Division is Blank");
+            alert.setContentText("Select Division");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
+    }
 
     @FXML
     void onActionSaveCustomer(ActionEvent event) throws IOException {
-        String customer_Name = addCustomerNameTXT.getText();
-        String address = addAddressTXT.getText();
-        String postal_code = addPostalCodeTXT.getText();
-        String phone = addPhoneTXT.getText();
-        Divisions divisions = divisionCombo.getValue();
+        Boolean gtg = errorCheck(addCustomerIDTXT.getText());
+        if (gtg) {
 
-        JDBC.addCustomer(customer_Name, address, postal_code, phone, divisions.getDivision_ID());
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/Customers.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+            String customer_Name = addCustomerNameTXT.getText();
+            String address = addAddressTXT.getText();
+            String postal_code = addPostalCodeTXT.getText();
+            String phone = addPhoneTXT.getText();
+            Divisions divisions = divisionCombo.getValue();
+
+            JDBC.addCustomer(customer_Name, address, postal_code, phone, divisions.getDivision_ID());
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/View/Customers.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
 
     }
 

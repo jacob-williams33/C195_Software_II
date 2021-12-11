@@ -229,7 +229,7 @@ public class UpdateAppointmentController implements Initializable {
         }
 
         if (LDTstart().isAfter(LDTend())) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Warning");
             alert.setHeaderText("Start Time Cannot Be Before End Time");
             alert.setContentText("Select New Time");
@@ -237,7 +237,7 @@ public class UpdateAppointmentController implements Initializable {
             return false;
         }
         if (LDTend().isBefore(LDTstart())) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Warning");
             alert.setHeaderText("End Time Cannot Be Before Start Time");
             alert.setContentText("Select New Time");
@@ -337,9 +337,7 @@ public class UpdateAppointmentController implements Initializable {
             stage.setScene(new Scene(scene));
             stage.show();
         }
-        else {
-            System.out.println("Broken");
-        }
+
     }
 
     @FXML

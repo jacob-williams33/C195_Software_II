@@ -170,7 +170,7 @@ public LocalDateTime LDTend() {
         }
 
         if (LDTstart().isAfter(LDTend())) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Warning");
             alert.setHeaderText("Start Time Cannot Be Before End Time");
             alert.setContentText("Select New Time");
@@ -178,7 +178,7 @@ public LocalDateTime LDTend() {
             return false;
         }
         if (LDTend().isBefore(LDTstart())) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Warning");
             alert.setHeaderText("End Time Cannot Be Before Start Time");
             alert.setContentText("Select New Time");
@@ -266,9 +266,7 @@ public LocalDateTime LDTend() {
         stage.setScene(new Scene(scene));
         stage.show();
     }
-        else {
-        System.out.println("Broken");
-    }
+
 
     }
 
