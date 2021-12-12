@@ -1,7 +1,6 @@
 package Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -114,6 +113,71 @@ public class JDBC {
 
         return aList;
     }
+    public static ObservableList<Apppointments> getAppointmentsByWeek() {
+        ObservableList<Apppointments> aList = FXCollections.observableArrayList();
+        try {
+            String sql = "SELECT * FROM appointments WHERE WEEK(Start) = WEEK(current_date())";
+            PreparedStatement psaw = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = psaw.executeQuery();
+
+            while (rs.next()) {
+                int Appointment_ID = rs.getInt("Appointment_ID");
+                String Title = rs.getString("Title");
+                String Description = rs.getString("Description");
+                String Location = rs.getString("Location");
+                String Type = rs.getString("Type");
+                LocalDateTime Start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime End = rs.getTimestamp("End").toLocalDateTime();
+                int Customer_ID = rs.getInt("Customer_ID");
+                int User_ID = rs.getInt("User_ID");
+                int Contact_ID = rs.getInt("Contact_ID");
+                Apppointments a = new Apppointments(Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID);
+                aList.add(a);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return aList;
+    }
+
+    public static Integer getAppointmentCountByType(String type) {
+
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM appointments WHERE Type=(?)";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, type);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                count = rs.getInt("COUNT(*)");
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+    public static Integer getAppointmentCountByMonth(Integer month) {
+
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM appointments WHERE MONTH(Start) = (?)";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, month);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                count = rs.getInt("COUNT(*)");
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+
     public static ObservableList<Customers> getAllCustomers() {
         ObservableList<Customers> cList = FXCollections.observableArrayList();
         try {

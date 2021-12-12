@@ -77,7 +77,7 @@ public class AppointmentsController implements Initializable {
             appointmentsTable.setItems(appointments);
         }
         else if (appByWeekButton.isSelected()) {
-            appointments = JDBC.getAppointmentsByMonth();
+            appointments = JDBC.getAppointmentsByWeek();
             appointmentsTable.setItems(appointments);
         }
     }

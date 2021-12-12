@@ -12,10 +12,10 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="mainMenuButtonR1" layoutX="51.0" layoutY="350.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionMainMenuR1" prefHeight="40.0" prefWidth="100.0" text="Main Menu" />
-                        <ComboBox layoutX="51.0" layoutY="149.0" prefHeight="38.0" prefWidth="135.0" promptText="Select Month" />
-                        <ComboBox layoutX="207.0" layoutY="148.0" prefHeight="40.0" prefWidth="134.0" promptText="Select Appt Type" />
+                        <ComboBox fx:id="appMonth" layoutX="51.0" layoutY="149.0" onAction="#onActionSelectMonth" prefHeight="38.0" prefWidth="135.0" promptText="Select Month" />
+                        <ComboBox fx:id="appType" layoutX="207.0" layoutY="148.0" onAction="#onActionSelectType" prefHeight="40.0" prefWidth="134.0" promptText="Select Appt Type" />
                         <Label layoutX="371.0" layoutY="153.0" prefHeight="29.0" prefWidth="122.0" text="Number of Appts" />
-                        <Label layoutX="493.0" layoutY="158.0" prefHeight="20.0" prefWidth="52.0" text="Label" />
+                        <Label fx:id="countLabel" layoutX="493.0" layoutY="158.0" prefHeight="20.0" prefWidth="52.0" />
                      </children></AnchorPane>
             </content>
 
