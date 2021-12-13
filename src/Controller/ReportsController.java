@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,39 +23,58 @@ public class ReportsController implements Initializable {
     @FXML
     public ComboBox appMonth;
     @FXML
-    public Label countLabel;
+    public Label monthCount;
+    @FXML
+    public Label typeCount;
+    @FXML
+    public Label totalCount;
 
     Stage stage;
     Parent scene;
 
     public ObservableList<String> createTypeList() {
         ObservableList<String> types = FXCollections.observableArrayList();
+
         types.addAll("Initial Intake", "Planning Session", "Follow Up", "Med Check", "Brain Dump", "Process Discussion", "Debriefing", "Termination");
         return types;
     }
     public ObservableList<Month> createMonthList() {
         ObservableList<Month> months = FXCollections.observableArrayList();
-        months.addAll(Month.JANUARY, Month.FEBRUARY, Month.MARCH, Month.APRIL, Month.MAY, Month.JUNE, Month.JULY, Month.AUGUST, Month.SEPTEMBER, Month.OCTOBER, Month.NOVEMBER, Month.DECEMBER);
+        months.addAll( Month.JANUARY, Month.FEBRUARY, Month.MARCH, Month.APRIL, Month.MAY, Month.JUNE, Month.JULY, Month.AUGUST, Month.SEPTEMBER, Month.OCTOBER, Month.NOVEMBER, Month.DECEMBER);
         return months;
     }
-    @FXML
-    public Integer onActionSelectType(ActionEvent event) throws IOException {
-        String type = (String) appType.getValue();
-        Integer count = JDBC.getAppointmentCountByType(type);
+//    @FXML
+//    public Integer onActionSelectType(ActionEvent event) throws IOException {
+//        String type = (String) appType.getValue();
+//        Integer count = JDBC.getAppointmentCountByType(type);
+//        return count;
+//    }
+//
+//    @FXML
+//    public Integer onActionSelectMonth(ActionEvent event) throws IOException {
+//        Month monthSelection = (Month) appMonth.getValue();
+//        Integer month = monthSelection.getValue();
+//        Integer count = JDBC.getAppointmentCountByMonth(month);
+//
+//        return count;
+//    }
+    public void onActionGenerate(ActionEvent event) {
+        try {
+            Month monthSelection = (Month) appMonth.getValue();
+            Integer month = monthSelection.getValue();
+            String type = (String) appType.getValue();
+            Integer count = JDBC.getAppointmentCountByMonthAndType(month, type);
+            totalCount.setText(String.valueOf(count));
 
-        return count;
+        }
+        catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Month or Type is Blank");
+            alert.setContentText("Select Type and Month");
+            alert.showAndWait();
+        }
     }
-
-    @FXML
-    public Integer onActionSelectMonth(ActionEvent event) throws IOException {
-        Month monthSelection = (Month) appMonth.getValue();
-        Integer month = monthSelection.getValue();
-        Integer count = JDBC.getAppointmentCountByMonth(month);
-
-        return count;
-    }
-
-
 
 
 

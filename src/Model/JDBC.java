@@ -177,6 +177,25 @@ public class JDBC {
         }
         return count;
     }
+    public static Integer getAppointmentCountByMonthAndType(Integer month, String type) {
+
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM appointments WHERE Type = ? AND MONTH(Start) = ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, type);
+            ps.setInt(2, month);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                count = rs.getInt("COUNT(*)");
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
 
     public static ObservableList<Customers> getAllCustomers() {
         ObservableList<Customers> cList = FXCollections.observableArrayList();
