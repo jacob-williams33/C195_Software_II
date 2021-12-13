@@ -26,19 +26,19 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="mainMenuButtonR2" layoutX="26.0" layoutY="410.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionMainMenuR2" prefHeight="40.0" prefWidth="100.0" text="Main Menu" />
-                        <ComboBox layoutX="26.0" layoutY="31.0" prefHeight="42.0" prefWidth="120.0" promptText="Select Contact" />
-                         <TableView layoutX="14.0" layoutY="140.0" prefHeight="243.0" prefWidth="724.0">
+                        <ComboBox fx:id="contactsCombo" layoutX="26.0" layoutY="31.0" onAction="#onActionSelectContact" prefHeight="42.0" prefWidth="120.0" promptText="Select Contact" />
+                         <TableView fx:id="appTable" layoutX="14.0" layoutY="140.0" prefHeight="243.0" prefWidth="724.0">
                              <columns>
-                                 <TableColumn prefWidth="66.40002727508545" text="Appt ID" />
-                                 <TableColumn minWidth="0.0" prefWidth="35.0" text="Title" />
-                                 <TableColumn minWidth="0.0" prefWidth="69.0" text="Description" />
-                                 <TableColumn minWidth="0.0" prefWidth="38.0" text="Location" />
-                                 <TableColumn minWidth="0.0" prefWidth="52.0" text="Contact" />
-                              <TableColumn minWidth="0.0" prefWidth="76.0" text="Type" />
-                              <TableColumn minWidth="0.0" prefWidth="115.0" text="Start Date and Time" />
-                              <TableColumn minWidth="0.0" prefWidth="102.0" text="End Date and Time" />
-                              <TableColumn prefWidth="81.0" text="Customer ID" />
-                              <TableColumn prefWidth="88.0" text="User ID" />
+                                 <TableColumn fx:id="appID" prefWidth="66.40002727508545" text="Appt ID" />
+                                 <TableColumn fx:id="appTitle" minWidth="0.0" prefWidth="35.0" text="Title" />
+                                 <TableColumn fx:id="appDesc" minWidth="0.0" prefWidth="69.0" text="Description" />
+                                 <TableColumn fx:id="appLoc" minWidth="0.0" prefWidth="38.0" text="Location" />
+                                 <TableColumn fx:id="appContact" minWidth="0.0" prefWidth="52.0" text="Contact" />
+                              <TableColumn fx:id="appTypeCOL" minWidth="0.0" prefWidth="76.0" text="Type" />
+                              <TableColumn fx:id="appStart" minWidth="0.0" prefWidth="115.0" text="Start Date and Time" />
+                              <TableColumn fx:id="appEnd" minWidth="0.0" prefWidth="102.0" text="End Date and Time" />
+                              <TableColumn fx:id="appCustomer" prefWidth="81.0" text="Customer ID" />
+                              <TableColumn fx:id="appUser" prefWidth="88.0" text="User ID" />
                              </columns>
                          </TableView>
                      </children></AnchorPane>

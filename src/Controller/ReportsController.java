@@ -1,8 +1,12 @@
 package Controller;
 
+import Model.Apppointments;
+import Model.Contacts;
+import Model.Divisions;
 import Model.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +33,31 @@ public class ReportsController implements Initializable {
     public Label typeCount;
     @FXML
     public Label totalCount;
+    @FXML
+    public ComboBox<Contacts> contactsCombo;
+    @FXML
+    public TableView appTable;
+    @FXML
+    public TableColumn appID;
+    @FXML
+    public TableColumn appTitle;
+    @FXML
+    public TableColumn appDesc;
+    @FXML
+    public TableColumn appLoc;
+    @FXML
+    public TableColumn appContact;
+    @FXML
+    public TableColumn appTypeCOL;
+    @FXML
+    public TableColumn appStart;
+    @FXML
+    public TableColumn appEnd;
+    @FXML
+    public TableColumn appCustomer;
+    @FXML
+    public TableColumn appUser;
+
 
     Stage stage;
     Parent scene;
@@ -63,8 +93,11 @@ public class ReportsController implements Initializable {
             Month monthSelection = (Month) appMonth.getValue();
             Integer month = monthSelection.getValue();
             String type = (String) appType.getValue();
-            Integer count = JDBC.getAppointmentCountByMonthAndType(month, type);
-            totalCount.setText(String.valueOf(count));
+            if (type == null || type.isBlank()) {
+                throw new Exception();
+            }
+                Integer count = JDBC.getAppointmentCountByMonthAndType(month, type);
+                totalCount.setText(String.valueOf(count));
 
         }
         catch (Exception e) {
@@ -76,8 +109,6 @@ public class ReportsController implements Initializable {
         }
     }
 
-
-
     @FXML
     void onActionMainMenuR1(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -85,6 +116,7 @@ public class ReportsController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
     @FXML
     void onActionMainMenuR2(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -92,12 +124,38 @@ public class ReportsController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
     @FXML
     void onActionMainMenuR3(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+    }
+
+    public ObservableList<Apppointments> contactFilter() {
+        ObservableList<Apppointments> allAppointments= JDBC.getAllAppointments();
+        FilteredList<Apppointments> filteredContactList = new FilteredList<>(allAppointments, i -> i.getContact_ID() == contactsCombo.getSelectionModel().getSelectedItem().getContact_ID());
+
+        return filteredContactList;
+
+    }
+
+    @FXML
+    public void onActionSelectContact(ActionEvent event) {
+
+        appTable.setItems(contactFilter());
+//        appID.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
+//        appTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
+//        appDesc.setCellValueFactory(new PropertyValueFactory<>("Description"));
+//        appLoc.setCellValueFactory(new PropertyValueFactory<>("Location"));
+//        appTypeCOL.setCellValueFactory(new PropertyValueFactory<>("Type"));
+//        appStart.setCellValueFactory(new PropertyValueFactory<>("Start"));
+//        appEnd.setCellValueFactory(new PropertyValueFactory<>("End"));
+//        appCustomer.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
+//        appUser.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
+//        appContact.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
+
     }
 
         @Override
@@ -108,6 +166,20 @@ public class ReportsController implements Initializable {
             appMonth.setVisibleRowCount(5);
             appMonth.setPromptText("Select Appointment Month");
             appMonth.setItems(createMonthList());
+            contactsCombo.setVisibleRowCount(5);
+            contactsCombo.setPromptText("Select Contact");
+            contactsCombo.setItems(JDBC.getAllContacts());
+            appTable.setItems(JDBC.getAllAppointments());
+            appID.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
+            appTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
+            appDesc.setCellValueFactory(new PropertyValueFactory<>("Description"));
+            appLoc.setCellValueFactory(new PropertyValueFactory<>("Location"));
+            appTypeCOL.setCellValueFactory(new PropertyValueFactory<>("Type"));
+            appStart.setCellValueFactory(new PropertyValueFactory<>("Start"));
+            appEnd.setCellValueFactory(new PropertyValueFactory<>("End"));
+            appCustomer.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
+            appUser.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
+            appContact.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
 
         }
 }
