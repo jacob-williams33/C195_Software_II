@@ -3,6 +3,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class JDBC {
@@ -201,12 +202,18 @@ public class JDBC {
 
         int count = 0;
         try {
-            String sql = "SELECT COUNT(*) FROM appointments WHERE DATE(Start) = current_date()";
+            LocalDate ld = LocalDate.now();
+            System.out.println(ld);
+            String sql = "SELECT Start FROM appointments ";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                count = rs.getInt("COUNT(*)");
+               LocalDate d = rs.getTimestamp("Start").toLocalDateTime().toLocalDate();
+                if (d.equals(ld)) {
+                    count++;
+                }
+
 
             }
         } catch (SQLException ex) {

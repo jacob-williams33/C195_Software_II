@@ -1,0 +1,13 @@
+
+Dec 14, 2021 3:23:59 PM Controller.LogInController unsuccessfulLogIn
+INFO: User:  Unsuccessfully Logged In At 2021-12-14T15:23:59.788242600-07:00[America/Denver] time zone
+Dec 14, 2021 3:24:03 PM Controller.LogInController successfulLogIn
+INFO: User: test Successfully Logged In At 2021-12-14T15:24:03.292240800-07:00[America/Denver] time zone
+Dec 14, 2021 3:27:26 PM Controller.LogInController successfulLogIn
+INFO: User: test Successfully Logged In At 2021-12-14T15:27:26.949241800-07:00[America/Denver] time zone
+Dec 14, 2021 3:41:29 PM Controller.LogInController successfulLogIn
+INFO: User: test Successfully Logged In At 2021-12-14T15:41:29.769684500-07:00[America/Denver] time zone
+Dec 14, 2021 3:48:28 PM Controller.LogInController successfulLogIn
+INFO: User: test Successfully Logged In At 2021-12-14T15:48:28.837698600-07:00[America/Denver] time zone
+Dec 14, 2021 3:53:22 PM Controller.LogInController successfulLogIn
+INFO: User: test Successfully Logged In At 2021-12-14T15:53:22.821171900-07:00[America/Denver] time zone
