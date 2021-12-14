@@ -21,10 +21,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class LogInController implements Initializable {
+
 
     @FXML
     public Label userName;
@@ -39,7 +46,7 @@ public class LogInController implements Initializable {
     @FXML
     public Button logInButton;
     @FXML
-    public TextField userNameTXT;
+    public  TextField userNameTXT;
     @FXML
     public TextField passwordTXT;
 
@@ -48,7 +55,36 @@ public class LogInController implements Initializable {
     Stage stage;
     Parent scene;
 
+    public void successfulLogIn() {
+        Logger log = Logger.getLogger("login_activity.txt");
 
+        try {
+            FileHandler fh = new FileHandler("login_activity.txt", true);
+            SimpleFormatter sf = new SimpleFormatter();
+            fh.setFormatter(sf);
+            log.addHandler(fh);
+        } catch (IOException e) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.INFO, null, e);
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, e);}
+
+        ZonedDateTime now = ZonedDateTime.now();
+        log.info("User: " + userNameTXT.getText() + " Successfully Logged In At " + now + " time zone");
+    }
+    public void unsuccessfulLogIn() {
+        Logger log = Logger.getLogger("login_activity.txt");
+
+        try {
+            FileHandler fh = new FileHandler("login_activity.txt", true);
+            SimpleFormatter sf = new SimpleFormatter();
+            fh.setFormatter(sf);
+            log.addHandler(fh);
+        } catch (IOException e) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.INFO, null, e);
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, e);}
+
+        ZonedDateTime now = ZonedDateTime.now();
+        log.info("User: " + userNameTXT.getText() + " Unsuccessfully Logged In At "  + now + " time zone");
+    }
 
     @FXML
     void onActionLogIn(ActionEvent event) throws IOException {
@@ -58,7 +94,7 @@ public class LogInController implements Initializable {
         boolean gtg = JDBC.checkLogin(userName, password);
 
         if (gtg) {
-            loginActivity.successfulLogIn();
+            successfulLogIn();
             appointmentAlert();
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
@@ -66,7 +102,7 @@ public class LogInController implements Initializable {
             stage.show();
         }
         else {
-            loginActivity.unsuccessfulLogIn();
+            unsuccessfulLogIn();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(myRB.getString("LogInError"));
             alert.setHeaderText(myRB.getString("Mismatch"));
