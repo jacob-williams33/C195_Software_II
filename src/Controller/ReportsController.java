@@ -134,10 +134,12 @@ public class ReportsController implements Initializable {
 
         appTable.setItems(contactFilter());
     }
+    Integer apptCount = JDBC.getAppointmentCountToday();
+    appTodayInterface getAppcount = () -> appToday.setText(String.valueOf(apptCount));
 
     public void appointmentsToday() {
         Integer apptCount = JDBC.getAppointmentCountToday();
-        appToday.setText(String.valueOf(apptCount));
+        getAppcount.apptToday();
     }
 
         @Override

@@ -1,5 +1,7 @@
 package Controller;
 
+
+import Main.TimeZoneInterface;
 import Model.Apppointments;
 import Model.JDBC;
 import javafx.collections.ObservableList;
@@ -17,13 +19,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LogInController implements Initializable {
@@ -49,6 +47,8 @@ public class LogInController implements Initializable {
 
     Stage stage;
     Parent scene;
+
+
 
     @FXML
     void onActionLogIn(ActionEvent event) throws IOException {
@@ -98,6 +98,8 @@ public class LogInController implements Initializable {
             }
         }
     }
+    //Lambda expression for getting TimeZone display
+    TimeZoneInterface getZone = () -> timeZone.setText(ZoneId.systemDefault().toString());
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
@@ -107,7 +109,7 @@ public class LogInController implements Initializable {
                         password.setText(myRB.getString("Password"));
                         logIn.setText(myRB.getString("LogIn"));
                         location.setText(myRB.getString("TimeZone"));
-                        timeZone.setText(ZoneId.systemDefault().toString());
+                        getZone.timeZone();
 
     }
 }
