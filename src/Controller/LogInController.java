@@ -58,6 +58,7 @@ public class LogInController implements Initializable {
         boolean gtg = JDBC.checkLogin(userName, password);
 
         if (gtg) {
+            loginActivity.successfulLogIn();
             appointmentAlert();
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
@@ -65,6 +66,7 @@ public class LogInController implements Initializable {
             stage.show();
         }
         else {
+            loginActivity.unsuccessfulLogIn();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(myRB.getString("LogInError"));
             alert.setHeaderText(myRB.getString("Mismatch"));

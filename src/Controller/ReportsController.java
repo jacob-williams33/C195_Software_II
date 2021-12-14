@@ -138,7 +138,7 @@ public class ReportsController implements Initializable {
     appTodayInterface getAppcount = () -> appToday.setText(String.valueOf(apptCount));
 
     public void appointmentsToday() {
-        Integer apptCount = JDBC.getAppointmentCountToday();
+
         getAppcount.apptToday();
     }
 
