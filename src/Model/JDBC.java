@@ -197,6 +197,24 @@ public class JDBC {
         return count;
     }
 
+    public static Integer getAppointmentCountToday() {
+
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM appointments WHERE DATE(Start) = current_date()";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                count = rs.getInt("COUNT(*)");
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+
     public static ObservableList<Customers> getAllCustomers() {
         ObservableList<Customers> cList = FXCollections.observableArrayList();
         try {
@@ -311,6 +329,28 @@ public class JDBC {
         return uList;
 
     }
+    public static Boolean checkLogin(String userName, String password) {
+
+        Integer count = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM users WHERE User_Name = ? AND Password = ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, userName);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt("COUNT(*)");
+            }
+            if (count != 0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+
 
     public static void addCustomer(String customer_Name, String address, String postal_Code, String phone, Integer division_ID)
      {
@@ -400,7 +440,7 @@ public class JDBC {
             String sqlupdateappointment = "UPDATE appointments " +
                     "SET Title=?, Description=?, Location=?, Type=?, Start=?, End=?, " +
                     "Customer_ID=?, User_ID=?, Contact_ID=? WHERE Appointment_ID=?";
-//            Division_ID=? WHERE Customer_ID=?"
+
             PreparedStatement psua  = JDBC.getConnection().prepareStatement(sqlupdateappointment);
             psua.setString(1, title);
             psua.setString(2, description);

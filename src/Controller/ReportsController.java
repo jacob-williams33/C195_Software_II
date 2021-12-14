@@ -57,6 +57,8 @@ public class ReportsController implements Initializable {
     public TableColumn appCustomer;
     @FXML
     public TableColumn appUser;
+    @FXML
+    public Label appToday;
 
 
     Stage stage;
@@ -73,21 +75,7 @@ public class ReportsController implements Initializable {
         months.addAll( Month.JANUARY, Month.FEBRUARY, Month.MARCH, Month.APRIL, Month.MAY, Month.JUNE, Month.JULY, Month.AUGUST, Month.SEPTEMBER, Month.OCTOBER, Month.NOVEMBER, Month.DECEMBER);
         return months;
     }
-//    @FXML
-//    public Integer onActionSelectType(ActionEvent event) throws IOException {
-//        String type = (String) appType.getValue();
-//        Integer count = JDBC.getAppointmentCountByType(type);
-//        return count;
-//    }
-//
-//    @FXML
-//    public Integer onActionSelectMonth(ActionEvent event) throws IOException {
-//        Month monthSelection = (Month) appMonth.getValue();
-//        Integer month = monthSelection.getValue();
-//        Integer count = JDBC.getAppointmentCountByMonth(month);
-//
-//        return count;
-//    }
+
     public void onActionGenerate(ActionEvent event) {
         try {
             Month monthSelection = (Month) appMonth.getValue();
@@ -145,17 +133,11 @@ public class ReportsController implements Initializable {
     public void onActionSelectContact(ActionEvent event) {
 
         appTable.setItems(contactFilter());
-//        appID.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
-//        appTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
-//        appDesc.setCellValueFactory(new PropertyValueFactory<>("Description"));
-//        appLoc.setCellValueFactory(new PropertyValueFactory<>("Location"));
-//        appTypeCOL.setCellValueFactory(new PropertyValueFactory<>("Type"));
-//        appStart.setCellValueFactory(new PropertyValueFactory<>("Start"));
-//        appEnd.setCellValueFactory(new PropertyValueFactory<>("End"));
-//        appCustomer.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
-//        appUser.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
-//        appContact.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
+    }
 
+    public void appointmentsToday() {
+        Integer apptCount = JDBC.getAppointmentCountToday();
+        appToday.setText(String.valueOf(apptCount));
     }
 
         @Override
@@ -180,6 +162,6 @@ public class ReportsController implements Initializable {
             appCustomer.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
             appUser.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
             appContact.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
-
+            appointmentsToday();
         }
 }
