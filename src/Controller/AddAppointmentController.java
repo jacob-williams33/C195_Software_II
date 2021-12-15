@@ -18,6 +18,8 @@ import java.time.*;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
+/** This class allows user to add appointments to the database.*/
+
 public class AddAppointmentController implements Initializable {
 
     public TextField addAppID;
