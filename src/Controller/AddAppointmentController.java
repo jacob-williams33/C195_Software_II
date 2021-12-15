@@ -38,18 +38,24 @@ public class AddAppointmentController implements Initializable {
     Stage stage;
     Parent scene;
 
+    /**This method creates a LocalDateTime Start object. This method combines the date selected and the start time into one object.
+     @return returns localdatetime object of start date and time*/
 public LocalDateTime LDTstart() {
     LocalTime startTime = startTimeCombo.getSelectionModel().getSelectedItem();
     LocalDate appointmentDate = datePicker.getValue();
     LocalDateTime LDTstart = LocalDateTime.of(appointmentDate, startTime);
     return  LDTstart;
 }
+    /**This method creates a LocalDateTime End object. This method combines the date selected and the end time into one object.
+       @return returns localdatetime object of end date and time*/
 public LocalDateTime LDTend() {
     LocalTime endTime = endTimeCombo.getSelectionModel().getSelectedItem();
     LocalDate appointmentDate = datePicker.getValue();
     LocalDateTime LDTend = LocalDateTime.of(appointmentDate, endTime);
     return LDTend;
 }
+/**This method creates a list of appointment types. This method creates an observable list used to populate the appointment type combobox
+ @return returns observable list of appointment types*/
 
     public ObservableList<String> createTypeList() {
         ObservableList<String> types = FXCollections.observableArrayList();
@@ -57,7 +63,8 @@ public LocalDateTime LDTend() {
         return types;
     }
 
-
+/**this method creates a business hour range. This method creates a time range for appointments and sets them to EST to populate the combo box for time options
+  @return returns time ranges for business hours*/
     public ObservableList<LocalTime> timeRanges() {
         ObservableList<LocalTime> comboTimes = FXCollections.observableArrayList();
         LocalTime openBusinessEST = LocalTime.of(8, 0);
@@ -85,6 +92,10 @@ public LocalDateTime LDTend() {
         }
         return comboTimes;
     }
+    /**This method checks multiple errors in setting an appointment. This method checks empty text fields and conflicting appointments.
+       @param Appointment_ID the auto-generated appointment ID
+       @return returns false if there is an error present and returns true if there are no issues*/
+
     public Boolean errorCheck(String Appointment_ID) {
         ObservableList<Apppointments> allAppointments = JDBC.getAllAppointments();
 
@@ -280,7 +291,7 @@ public LocalDateTime LDTend() {
         stage.show();
     }
 
-
+/**This method sets the combo boxes. This method takes the previous methods and populates the combo boxes necessary for adding the appointment*/
     @Override
     public void initialize(URL url, ResourceBundle rb){
         typeCombo.setVisibleRowCount(5);

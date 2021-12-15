@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**This class allows a user to create a new customer*/
+
 public class AddCustomerController implements Initializable {
 
     public TextField addCustomerIDTXT;
@@ -32,6 +34,10 @@ public class AddCustomerController implements Initializable {
 
     Stage stage;
     Parent scene;
+
+    /**This method checks for blank cells. This method checks for blank cells and displays error messages if found.
+      @param Appointment_ID passes in the apponitment ID of a customer
+     @return returns false if errors and true if none*/
 
     public Boolean errorCheck(String Appointment_ID) {
         ObservableList<Customers> allCustomers = JDBC.getAllCustomers();
@@ -115,17 +121,21 @@ public class AddCustomerController implements Initializable {
         stage.show();
 
     }
+    /**This method filters the list of divisions. This method filters divisions depending on what country is selected.
+     @return returns the division list filtered by country*/
     public ObservableList<Divisions> divisionFilter() {
         ObservableList<Divisions> allDivisions = JDBC.getAllDivisions();
         FilteredList<Divisions> filteredDivisionList = new FilteredList<>(allDivisions, i -> i.getCountry_ID() == countryCombo.getSelectionModel().getSelectedItem().getCountry_ID());
         return filteredDivisionList;
     }
+    /**This method returns the filtered division list. When the country is selected, this method filters the division list
+     @param actionEvent passes in set of combo box*/
     @FXML
     public void onCountrySelect(ActionEvent actionEvent) {
         divisionCombo.setItems(divisionFilter());
     }
 
-
+    /**This method sets the country and combo boxes. This method takes the division filters and the country list to populate combo boxes*/
     @Override
     public void initialize(URL url, ResourceBundle rb){
         countryCombo.setVisibleRowCount(5);

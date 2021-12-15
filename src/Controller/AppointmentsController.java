@@ -18,6 +18,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**This class displays appointments.*/
+
 public class AppointmentsController implements Initializable {
     Stage stage;
     Parent scene;
@@ -66,6 +68,9 @@ public class AppointmentsController implements Initializable {
     @FXML
     public RadioButton appByWeekButton;
 
+
+    /**This method filters appointments. This method filters appointments depending on which radio button is selected
+     @param event This event is determined by radio button that is clicked*/
     @FXML
     public void onActionAppointmentFilters(ActionEvent event) throws IOException {
         if (allAppButton.isSelected()) {
@@ -140,6 +145,7 @@ public class AppointmentsController implements Initializable {
         stage.show();
     }
 
+    /**This method sets the appointment table. This method populates the appointment table with all appointments*/
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
