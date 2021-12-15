@@ -17,6 +17,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**This class controls the customers table*/
+
 public class CustomersController implements Initializable {
     Stage stage;
     Parent scene;
@@ -42,6 +44,8 @@ public class CustomersController implements Initializable {
     @FXML
     public TableColumn<Customers, String> phoneNumberCOL;
 
+    /**This method navigates to the add customer screen
+     @param event clicked*/
 
     @FXML
     void onActionAddCustomer(ActionEvent event) throws IOException {
@@ -50,6 +54,9 @@ public class CustomersController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
+    /**This method navigates to the update customer screen
+     @param event clicked*/
 
     @FXML
     void onActionUpdateCustomer(ActionEvent event) throws IOException {
@@ -74,6 +81,10 @@ public class CustomersController implements Initializable {
             alert.showAndWait();
         }
     }
+
+    /**This method navigates to the main menu screen
+     @param event clicked*/
+
     @FXML
     void onActionMainMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -81,6 +92,10 @@ public class CustomersController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
+    /**This method navigates to the log in screen
+     @param event clicked*/
+
     @FXML
     void onActionLogOutC(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -88,6 +103,9 @@ public class CustomersController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
+    /**This method deletes the selected customer. Deletes any associated appointments simultaneously.
+     @param event clicked*/
 
     @FXML
     void onActionDeleteCustomer(ActionEvent event) throws IOException {
@@ -106,7 +124,7 @@ public class CustomersController implements Initializable {
         stage.show();
     }
 
-
+    /**This method sets the customer table. This method sets each column with customers from database*/
     @Override
     public void initialize(URL url, ResourceBundle rb){
 

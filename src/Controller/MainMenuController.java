@@ -13,10 +13,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**This class allows the user to navigate to multiple screens*/
+
 public class MainMenuController implements Initializable {
 
     Stage stage;
     Parent scene;
+
+    /**This method navigates to the customer screen
+     @param event clicked*/
 
     @FXML
     void onActionCustomers(ActionEvent event) throws IOException {
@@ -26,6 +31,9 @@ public class MainMenuController implements Initializable {
         stage.show();
     }
 
+    /**This method navigates to the appointment screen
+     @param event clicked*/
+
     @FXML
     void onActionAppointments(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -33,6 +41,10 @@ public class MainMenuController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
+    /**This method navigates to the reports screen
+     @param event clicked*/
+
     @FXML
     void onActionReports(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -40,6 +52,10 @@ public class MainMenuController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
+    /**This method navigates to the log in screen
+     @param event clicked*/
+
     @FXML
     void onActionLogOut(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();

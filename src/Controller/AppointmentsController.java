@@ -87,6 +87,9 @@ public class AppointmentsController implements Initializable {
         }
     }
 
+    /**This method navigates to the add appointment screen
+     @param event clicked*/
+
     @FXML
     void onActionAddAppointment(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -94,6 +97,9 @@ public class AppointmentsController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
+    /**This method navigates to the update appointment screen
+     @param event clicked*/
 
     @FXML
     void onActionUpdateAppointment(ActionEvent event) throws IOException {
@@ -114,6 +120,9 @@ public class AppointmentsController implements Initializable {
         }
     }
 
+    /**This method deletes the selected appointment
+     @param event clicked*/
+
     @FXML
     void onActionDeleteAppointment(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -130,6 +139,10 @@ public class AppointmentsController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
+    /**This method navigates to the main menu screen
+     @param event clicked*/
+
     @FXML
     void onActionMainMenuA(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -137,6 +150,10 @@ public class AppointmentsController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
+    /**This method navigates to the log in screen
+     @param event clicked*/
+
     @FXML
     void onActionLogOutA(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();

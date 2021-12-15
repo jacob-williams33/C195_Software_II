@@ -22,6 +22,8 @@ import java.net.URL;
 import java.time.Month;
 import java.util.ResourceBundle;
 
+/**This class allows the user to view multiple reports*/
+
 public class ReportsController implements Initializable {
     @FXML
     public ComboBox appType;
@@ -64,17 +66,27 @@ public class ReportsController implements Initializable {
     Stage stage;
     Parent scene;
 
+    /**This method creates a list of appointment types
+      @return types, the list of available appointment types*/
+
     public ObservableList<String> createTypeList() {
         ObservableList<String> types = FXCollections.observableArrayList();
 
         types.addAll("Initial Intake", "Planning Session", "Follow Up", "Med Check", "Brain Dump", "Process Discussion", "Debriefing", "Termination");
         return types;
     }
+
+    /**This method creates a list of months
+     @return months, all months of the year*/
+
     public ObservableList<Month> createMonthList() {
         ObservableList<Month> months = FXCollections.observableArrayList();
         months.addAll( Month.JANUARY, Month.FEBRUARY, Month.MARCH, Month.APRIL, Month.MAY, Month.JUNE, Month.JULY, Month.AUGUST, Month.SEPTEMBER, Month.OCTOBER, Month.NOVEMBER, Month.DECEMBER);
         return months;
     }
+
+    /**THis method generates the appointment count by month and type
+     @param event clicked*/
 
     public void onActionGenerate(ActionEvent event) {
         try {
@@ -97,6 +109,9 @@ public class ReportsController implements Initializable {
         }
     }
 
+    /**This method returns to main menu
+     @param event clicked*/
+
     @FXML
     void onActionMainMenuR1(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -104,7 +119,8 @@ public class ReportsController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
-
+    /**This method returns to main menu
+     @param event clicked*/
     @FXML
     void onActionMainMenuR2(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -112,7 +128,8 @@ public class ReportsController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
-
+    /**This method returns to main menu
+     @param event clicked*/
     @FXML
     void onActionMainMenuR3(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -120,6 +137,9 @@ public class ReportsController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
+    /**This method filters appointments by contact. When a contact is selected, the appointment list is filtered
+     @return filteredContactList, returns filtered list dependent on contact selected*/
 
     public ObservableList<Apppointments> contactFilter() {
         ObservableList<Apppointments> allAppointments= JDBC.getAllAppointments();
@@ -129,6 +149,9 @@ public class ReportsController implements Initializable {
 
     }
 
+    /**This method filters the appointments when contact is selected
+      @param event clicked */
+
     @FXML
     public void onActionSelectContact(ActionEvent event) {
 
@@ -137,10 +160,14 @@ public class ReportsController implements Initializable {
     Integer apptCount = JDBC.getAppointmentCountToday();
     appTodayInterface getAppcount = () -> appToday.setText(String.valueOf(apptCount));
 
+    /**This appointment calls a lambda expression to get count of appointments on the current day*/
+
     public void appointmentsToday() {
 
         getAppcount.apptToday();
     }
+
+    /**This method sets the appointment table and combo boxes*/
 
         @Override
         public void initialize(URL url, ResourceBundle rb){

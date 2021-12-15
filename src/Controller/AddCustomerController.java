@@ -36,10 +36,10 @@ public class AddCustomerController implements Initializable {
     Parent scene;
 
     /**This method checks for blank cells. This method checks for blank cells and displays error messages if found.
-      @param Appointment_ID passes in the apponitment ID of a customer
+      @param Customer_ID passes in the apponitment ID of a customer
      @return returns false if errors and true if none*/
 
-    public Boolean errorCheck(String Appointment_ID) {
+    public Boolean errorCheck(String Customer_ID) {
         ObservableList<Customers> allCustomers = JDBC.getAllCustomers();
 
         if (addCustomerNameTXT.getText().isEmpty()) {
@@ -92,7 +92,8 @@ public class AddCustomerController implements Initializable {
         }
         return true;
     }
-
+    /**This method saves the customer add. When clicked, update is passed into customer table
+     @param event  clicked*/
     @FXML
     void onActionSaveCustomer(ActionEvent event) throws IOException {
         Boolean gtg = errorCheck(addCustomerIDTXT.getText());
@@ -112,6 +113,9 @@ public class AddCustomerController implements Initializable {
         }
 
     }
+
+    /**This method cancels the add process. Navigates back to customers screen
+     @param event clicked*/
 
     @FXML
     void onActionCancelAddCustomer(ActionEvent event) throws IOException {

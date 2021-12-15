@@ -6,6 +6,8 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**This class controls the database connection and queries*/
+
 public class JDBC {
  private static final String protocol = "jdbc";
      private static final String vendor = ":mysql:";
@@ -17,6 +19,8 @@ public class JDBC {
         private static String password = "Passw0rd!"; // Password
         private static Connection connection = null;  // Connection Interface
         private static PreparedStatement preparedStatement;
+
+        /**Method to start connection to database*/
 
          public static void makeConnection() {
 
@@ -59,6 +63,9 @@ public class JDBC {
            return null;
        }
 
+    /**Method gets all appointments in database.
+     @return returns list of all appointments*/
+
     public static ObservableList<Apppointments> getAllAppointments() {
         ObservableList<Apppointments> aList = FXCollections.observableArrayList();
         try {
@@ -87,6 +94,10 @@ public class JDBC {
         return aList;
 
     }
+
+    /**Method gets appointments filtered by month.
+     @return returns list of appointments filtered by month*/
+
     public static ObservableList<Apppointments> getAppointmentsByMonth() {
         ObservableList<Apppointments> aList = FXCollections.observableArrayList();
         try {
@@ -114,6 +125,10 @@ public class JDBC {
 
         return aList;
     }
+
+    /**Method gets list of appointments filtered by week.
+     @return returns list of filtered appointments by week*/
+
     public static ObservableList<Apppointments> getAppointmentsByWeek() {
         ObservableList<Apppointments> aList = FXCollections.observableArrayList();
         try {
@@ -142,6 +157,10 @@ public class JDBC {
         return aList;
     }
 
+    /**Method to get number of appointments by type.
+     @param type type of appointment
+     @return number of appointments*/
+
     public static Integer getAppointmentCountByType(String type) {
 
         int count = 0;
@@ -160,6 +179,11 @@ public class JDBC {
         }
         return count;
     }
+
+    /**Method to get number of appointments by month.
+     @param month month of appointment
+     @return number of appointments*/
+
     public static Integer getAppointmentCountByMonth(Integer month) {
 
         int count = 0;
@@ -178,6 +202,11 @@ public class JDBC {
         }
         return count;
     }
+    /**Method to get number of appointments by type and month.
+     @param type type of appointment
+     @param month month of appointment
+     @return number of appointments*/
+
     public static Integer getAppointmentCountByMonthAndType(Integer month, String type) {
 
         int count = 0;
@@ -197,6 +226,9 @@ public class JDBC {
         }
         return count;
     }
+
+    /**Method to get number of appointments today.
+     @return number of appointments*/
 
     public static Integer getAppointmentCountToday() {
 
@@ -221,6 +253,9 @@ public class JDBC {
         }
         return count;
     }
+
+    /**Method to get list of all customers
+     @return customer list*/
 
     public static ObservableList<Customers> getAllCustomers() {
         ObservableList<Customers> cList = FXCollections.observableArrayList();
@@ -248,6 +283,10 @@ public class JDBC {
         return cList;
 
     }
+
+    /**Method to get all divisions in database
+     @return list of division*/
+
     public static ObservableList<Divisions> getAllDivisions() {
         ObservableList<Divisions> dList = FXCollections.observableArrayList();
         try {
@@ -271,6 +310,9 @@ public class JDBC {
 
     }
 
+    /**Method to get all contacts in database
+     @return list of contacts*/
+
     public static ObservableList<Contacts> getAllContacts() {
         ObservableList<Contacts> coList = FXCollections.observableArrayList();
         try {
@@ -292,6 +334,10 @@ public class JDBC {
         return coList;
 
     }
+
+    /**Method to get all countries in database
+     @return list of countries*/
+
     public static ObservableList<Countries> getAllCountries() {
         ObservableList<Countries> ctryList = FXCollections.observableArrayList();
         try {
@@ -313,6 +359,9 @@ public class JDBC {
         return ctryList;
 
     }
+
+    /**Method to get all users in database
+     @return list of users*/
 
     public static ObservableList<Users> getAllUsers() {
         ObservableList<Users> uList = FXCollections.observableArrayList();
@@ -336,6 +385,12 @@ public class JDBC {
         return uList;
 
     }
+
+    /**Method to check log in against user names and passwords in database
+     @param userName username from log in screen
+     @param password password from log in screen
+     @return true if user name and password match, false if not*/
+
     public static Boolean checkLogin(String userName, String password) {
 
         Integer count = 0;
@@ -358,7 +413,13 @@ public class JDBC {
         return false;
     }
 
-
+    /**Method to add customer to database.
+     @param customer_Name name of customer
+     @param address address of customer
+     @param postal_Code postal code of customer
+     @param phone phone number of customer
+     @param division_ID division of customer
+     */
     public static void addCustomer(String customer_Name, String address, String postal_Code, String phone, Integer division_ID)
      {
         try {
@@ -377,6 +438,15 @@ public class JDBC {
             ex.printStackTrace();
         }
     }
+
+    /**Method to update customer to database.
+     @param customer_Name name of customer
+     @param address address of customer
+     @param postal_Code postal code of customer
+     @param phone phone number of customer
+     @param division_ID division of customer
+     */
+
     public static void updateCustomer(String customer_Name, String address, String postal_Code, String phone, Integer division_ID, String customer_ID)
     {
         try {
@@ -396,6 +466,10 @@ public class JDBC {
             ex.printStackTrace();
         }
     }
+
+    /**Method to delete customer from database
+     @param Customer_ID ID of customer*/
+
     public static void deleteCustomer(int Customer_ID)
     {
         try {
@@ -413,6 +487,17 @@ public class JDBC {
             ex.printStackTrace();
         }
     }
+
+    /**Method to add an appointment to the database
+     @param title title of appointment
+     @param description description of appointment
+     @param location location of appointment
+     @param type type of appointment
+     @param start start time of appointment
+     @param end end time of appointment
+     @param customer_ID ID of customer for appointment
+     @param user_ID ID of user who created the appointment
+     @param contact_ID ID of contact for appointment*/
 
     public static void addAppointment(String title, String description, String location,
                                       String type, LocalDateTime start, LocalDateTime end,
@@ -438,6 +523,18 @@ public class JDBC {
             ex.printStackTrace();
         }
     }
+
+    /**Method to update an appointment to the database
+     @param title title of appointment
+     @param description description of appointment
+     @param location location of appointment
+     @param type type of appointment
+     @param start start time of appointment
+     @param end end time of appointment
+     @param customer_ID ID of customer for appointment
+     @param user_ID ID of user who created the appointment
+     @param contact_ID ID of contact for appointment*/
+
     public static void updateAppointment(String title, String description, String location,
                                          String type, LocalDateTime start, LocalDateTime end,
                                          Integer customer_ID, Integer user_ID, Integer contact_ID, String appointment_ID)
@@ -466,6 +563,10 @@ public class JDBC {
             ex.printStackTrace();
         }
     }
+
+    /**Method to delete appointment
+     @param Appointment_ID ID for appointment*/
+
     public static void deleteAppointment(int Appointment_ID)
     {
         try {

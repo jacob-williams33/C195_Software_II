@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**This class allows a user to update a customer*/
+
 public class UpdateCustomerController implements Initializable {
 
     public TextField updateCustomerIDTXT;
@@ -34,7 +36,12 @@ public class UpdateCustomerController implements Initializable {
 
     Stage stage;
     Parent scene;
-    public Boolean errorCheck(String Appointment_ID) {
+
+    /**This method checks for errors. Method checks for blank cells and returns error messages if they exist
+     @param Customer_ID pulls customer ID from selected customer
+     @return returns true if no errors, false and error message if there are*/
+
+    public Boolean errorCheck(String Customer_ID) {
         ObservableList<Customers> allCustomers = JDBC.getAllCustomers();
 
         if (updateCustomerNameTXT.getText().isEmpty()) {
@@ -88,7 +95,8 @@ public class UpdateCustomerController implements Initializable {
         return true;
     }
 
-
+/**THis method populates the cells with customer data. Selected customer attritbutes are passed into the fields
+ @param customers selected customer object*/
 
     public void populateSelectedCustomer (Customers customers) {
         updateCustomerIDTXT.setText(String.valueOf(customers.getCustomer_ID()));
@@ -110,6 +118,9 @@ public class UpdateCustomerController implements Initializable {
         }
     }
 
+    /**This method saves the customer update. When clicked, update is passed into customer table
+     @param event  clicked*/
+
     @FXML
     void onActionSaveCustomer(ActionEvent event) throws IOException {
         Boolean gtg = errorCheck(updateCustomerIDTXT.getText());
@@ -129,6 +140,9 @@ public class UpdateCustomerController implements Initializable {
         }
     }
 
+    /**This method cancels the update process. On click, return to customer table
+     @param event clicked*/
+
     @FXML
     void onActionCancelUpdateCustomer(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -137,16 +151,24 @@ public class UpdateCustomerController implements Initializable {
         stage.show();
     }
 
+    /**This method filters the list of divisions. Based on country, division list is filtered to possible options.
+     @return returns filtered divisions*/
+
     public ObservableList<Divisions> divisionFilter() {
         ObservableList<Divisions> allDivisions = JDBC.getAllDivisions();
         FilteredList<Divisions> filteredDivisionList = new FilteredList<>(allDivisions, i -> i.getCountry_ID() == updateCountryCombo.getSelectionModel().getSelectedItem().getCountry_ID());
         return filteredDivisionList;
     }
+
+    /**This method calls the division filter when selected
+     @param actionEvent clicked*/
+
     @FXML
     public void onCountrySelect(ActionEvent actionEvent) {
         updateDivisionCombo.setItems(divisionFilter());
     }
 
+/**This method sets the country and division combo boxes*/
 
     @Override
     public void initialize(URL url, ResourceBundle rb){

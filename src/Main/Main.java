@@ -14,8 +14,11 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-
+/**Main class to start program*/
 public class Main extends Application {
+
+    /**Sets scene of program
+     @param primaryStage first window*/
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -25,6 +28,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /**This method sets the connection, runs the program, and closes connection upon exit*/
 
     public static void main(String[] args) {
         JDBC.makeConnection();

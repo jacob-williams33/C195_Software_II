@@ -20,9 +20,9 @@ import java.time.chrono.ChronoZonedDateTime;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
+/**This class allows the user to update appointments*/
+
 public class UpdateAppointmentController implements Initializable {
-
-
 
     Stage stage;
     Parent scene;
@@ -60,24 +60,33 @@ public class UpdateAppointmentController implements Initializable {
     @FXML
     public ComboBox<Users> upAppUserID;
 
+    /**This method creates a localdatetime start object. Takes the date and start time and combines into one object
+     @return returns localdatetime start object*/
+
     public LocalDateTime LDTstart() {
         LocalTime startTime = upAppStart.getSelectionModel().getSelectedItem();
         LocalDate appointmentDate = upAppDate.getValue();
         LocalDateTime LDTstart = LocalDateTime.of(appointmentDate, startTime);
         return  LDTstart;
     }
+    /**This method creates a localdatetime ened object. Takes the date and end time and combines into one object
+     @return returns localdatetime end object*/
     public LocalDateTime LDTend() {
         LocalTime endTime = upAppEnd.getSelectionModel().getSelectedItem();
         LocalDate appointmentDate = upAppDate.getValue();
         LocalDateTime LDTend = LocalDateTime.of(appointmentDate, endTime);
         return LDTend;
     }
-
+/**This method creates a list of appointment types.
+  @return returns type list*/
     public ObservableList<String> createTypeList() {
         ObservableList<String> types = FXCollections.observableArrayList();
         types.addAll("Initial Intake", "Planning Session", "Follow Up", "Med Check", "Brain Dump", "Process Discussion", "Debriefing", "Termination");
         return types;
     }
+
+    /**This method creates business hours. Method takes range of hours in EST for available time options
+     @return returns combo box with business hours*/
 
     public ObservableList<LocalTime> timeRanges() {
         ObservableList<LocalTime> comboTimes = FXCollections.observableArrayList();
@@ -107,7 +116,8 @@ public class UpdateAppointmentController implements Initializable {
         return comboTimes;
     }
 
-
+/**This method populates the text fields and combo boxes with a selected appointment. Takes the selected appointment from the appointments table and populates.
+ @param apppointments selected appointment from appointments table*/
     public void populateSelectedAppointment(Apppointments apppointments) {
 
 
@@ -142,6 +152,10 @@ public class UpdateAppointmentController implements Initializable {
         }
 
     }
+
+    /**This method checks for errors. Looks for appointment conflicts and blank cells
+     @param Appointment_ID passes in appointment ID of selected appointment
+     @return returns true if no errors, false with error alert*/
 
     public Boolean errorCheck(String Appointment_ID) {
         ObservableList<Apppointments> allAppointments = JDBC.getAllAppointments();
@@ -301,6 +315,8 @@ public class UpdateAppointmentController implements Initializable {
         return true;
     }
 
+/**This method saves the appointment update. Saves the appointment and returns to appointments table
+ @param event click save*/
 
     @FXML
     void onActionSaveAppointment(ActionEvent event) throws IOException {
@@ -340,6 +356,9 @@ public class UpdateAppointmentController implements Initializable {
 
     }
 
+    /**This method cancels the action. Returns to appointment screen with clicked
+     @param event clicked button*/
+
     @FXML
     void onActionCancelUpdateAppointment(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -348,7 +367,7 @@ public class UpdateAppointmentController implements Initializable {
         stage.show();
     }
 
-
+/**This method sets the cells and comboboxes. Takes selected appointment and populates.*/
 
     @Override
     public void initialize(URL url, ResourceBundle rb){

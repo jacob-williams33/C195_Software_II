@@ -255,7 +255,8 @@ public LocalDateTime LDTend() {
         return true;
     }
 
-
+    /**This method saves the appointment add. When clicked, update is passed into appointment table
+     @param event  clicked*/
 
     @FXML
     void onActionSaveAppointment(ActionEvent event) throws IOException {
@@ -282,6 +283,9 @@ public LocalDateTime LDTend() {
 
 
     }
+
+    /**This method cancels the add process. Navigates back to appointments screen
+     @param event clicked*/
 
     @FXML
     void onActionCancelAddAppointment(ActionEvent event) throws IOException {

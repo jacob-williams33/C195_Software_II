@@ -30,6 +30,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**This class allows the user to log in to the application*/
+
 public class LogInController implements Initializable {
 
 
@@ -55,6 +57,8 @@ public class LogInController implements Initializable {
     Stage stage;
     Parent scene;
 
+    /**This method is called for a successful log in. If successful, the user goes to the main menu and the action is logged*/
+
     public void successfulLogIn() {
         Logger log = Logger.getLogger("login_activity.txt");
 
@@ -70,6 +74,9 @@ public class LogInController implements Initializable {
         ZonedDateTime now = ZonedDateTime.now();
         log.info("User: " + userNameTXT.getText() + " Successfully Logged In At " + now + " time zone");
     }
+
+    /**This method is called for an unsuccessful log in. If unsuccessful, the user goes to the main menu and the action is logged*/
+
     public void unsuccessfulLogIn() {
         Logger log = Logger.getLogger("login_activity.txt");
 
@@ -85,6 +92,9 @@ public class LogInController implements Initializable {
         ZonedDateTime now = ZonedDateTime.now();
         log.info("User: " + userNameTXT.getText() + " Unsuccessfully Logged In At "  + now + " time zone");
     }
+
+    /**This method navigates to the main menu screen. Method displays error if incorrect user name and password
+     @param event clicked*/
 
     @FXML
     void onActionLogIn(ActionEvent event) throws IOException {
@@ -111,6 +121,8 @@ public class LogInController implements Initializable {
         }
     }
 
+    /**This method controls appointment alerts. The alerts are for appointments within 15 minutes and nothing upcoming*/
+
     public void appointmentAlert() {
         LocalDateTime logInTime = LocalDateTime.now();
         ObservableList<Apppointments> allAppointments = JDBC.getAllAppointments();
@@ -136,8 +148,10 @@ public class LogInController implements Initializable {
             }
         }
     }
-    //Lambda expression for getting TimeZone display
+    /**Lambda expression. This lambda expression is used to display the time zone*/
     TimeZoneInterface getZone = () -> timeZone.setText(ZoneId.systemDefault().toString());
+
+    /**This method sets the log in screen*/
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
