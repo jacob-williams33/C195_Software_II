@@ -127,7 +127,8 @@ public class AppointmentsController implements Initializable {
     void onActionDeleteAppointment(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Warning");
-        alert.setHeaderText("This will permanently delete the selected appointment");
+        alert.setHeaderText("This will permanently delete the appointment " + appointmentsTable.getSelectionModel().getSelectedItem().getAppointment_ID() + " " +
+                appointmentsTable.getSelectionModel().getSelectedItem().getType());
         alert.setContentText("Do you wish to continue?");
 
         Optional<ButtonType> result = alert.showAndWait();
