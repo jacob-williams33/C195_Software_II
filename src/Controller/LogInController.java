@@ -137,14 +137,6 @@ public class LogInController implements Initializable {
                 alert.showAndWait();
 
             }
-            else {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle(myRB.getString("AppointmentAlert"));
-                alert.setHeaderText(myRB.getString("NoUpcoming"));
-                alert.setContentText(myRB.getString("Check"));
-                alert.showAndWait();
-
-            }
         }
     }
     /**Lambda expression. This lambda expression is used to display the time zone*/
