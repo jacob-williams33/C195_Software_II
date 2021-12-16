@@ -47,3 +47,5 @@ Dec 16, 2021 12:18:58 PM Controller.LogInController successfulLogIn
 INFO: User: test Successfully Logged In At 2021-12-16T12:18:58.305885200-07:00[America/Denver] time zone
 Dec 16, 2021 12:19:28 PM Controller.LogInController successfulLogIn
 INFO: User: test Successfully Logged In At 2021-12-16T12:19:28.324793700-07:00[America/Denver] time zone
+Dec 16, 2021 12:24:15 PM Controller.LogInController successfulLogIn
+INFO: User: test Successfully Logged In At 2021-12-16T12:24:15.695800700-07:00[America/Denver] time zone

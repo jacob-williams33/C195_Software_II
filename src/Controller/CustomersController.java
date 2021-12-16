@@ -111,7 +111,8 @@ public class CustomersController implements Initializable {
     void onActionDeleteCustomer(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Warning");
-        alert.setHeaderText("This will permanently delete the selected customer");
+        alert.setHeaderText("This will permanently delete customer " + customersTable.getSelectionModel().getSelectedItem().getCustomer_ID()
+        + " " + customersTable.getSelectionModel().getSelectedItem().getCustomer_Name());
         alert.setContentText("Do you wish to continue?");
 
         Optional<ButtonType> result = alert.showAndWait();
