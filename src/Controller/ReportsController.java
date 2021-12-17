@@ -160,7 +160,7 @@ public class ReportsController implements Initializable {
     Integer apptCount = JDBC.getAppointmentCountToday();
     appTodayInterface getAppcount = () -> appToday.setText(String.valueOf(apptCount));
 
-    /**This appointment calls a lambda expression to get count of appointments on the current day*/
+    /**This appointment calls a lambda expression to get count of appointments on the current day. It is used for more concise code.*/
 
     public void appointmentsToday() {
 

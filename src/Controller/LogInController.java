@@ -139,8 +139,11 @@ public class LogInController implements Initializable {
             }
         }
     }
-    /**Lambda expression. This lambda expression is used to display the time zone*/
     TimeZoneInterface getZone = () -> timeZone.setText(ZoneId.systemDefault().toString());
+    /**Lambda expression. This lambda expression is used to display the time zone and is used for more concise code*/
+    public void setTimeZone() {
+        getZone.timeZone();
+    }
 
     /**This method sets the log in screen*/
 
@@ -152,7 +155,7 @@ public class LogInController implements Initializable {
                         password.setText(myRB.getString("Password"));
                         logIn.setText(myRB.getString("LogIn"));
                         location.setText(myRB.getString("TimeZone"));
-                        getZone.timeZone();
+                        setTimeZone();
 
     }
 }
