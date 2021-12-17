@@ -129,7 +129,7 @@ public class LogInController implements Initializable {
         for (Apppointments a : allAppointments) {
             LocalDateTime start = a.getStart();
             long timeDifference = ChronoUnit.MINUTES.between(logInTime, start);
-            if (timeDifference > 0 && timeDifference <=15) {
+            if (timeDifference >= 0 && timeDifference <=15) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle(myRB.getString("AppointmentAlert"));
                 alert.setHeaderText(myRB.getString("Upcoming"));
