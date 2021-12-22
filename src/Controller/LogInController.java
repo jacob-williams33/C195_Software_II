@@ -4,6 +4,7 @@ package Controller;
 import Main.TimeZoneInterface;
 import Model.Apppointments;
 import Model.JDBC;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -124,21 +125,33 @@ public class LogInController implements Initializable {
     /**This method controls appointment alerts. The alerts are for appointments within 15 minutes and nothing upcoming*/
 
     public void appointmentAlert() {
+        boolean gtg = false;
         LocalDateTime logInTime = LocalDateTime.now();
         ObservableList<Apppointments> allAppointments = JDBC.getAllAppointments();
+        ObservableList<Apppointments> upcoming = FXCollections.observableArrayList();
         for (Apppointments a : allAppointments) {
             LocalDateTime start = a.getStart();
             long timeDifference = ChronoUnit.MINUTES.between(logInTime, start);
-            if (timeDifference >= 0 && timeDifference <=15) {
+            if (timeDifference >= 0 && timeDifference <= 15) {
+                upcoming.add(a);
+                gtg = true;
+            }
+        }if (gtg == true) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle(myRB.getString("AppointmentAlert"));
                 alert.setHeaderText(myRB.getString("Upcoming"));
                 alert.setContentText(myRB.getString("Check"));
                 alert.showAndWait();
-
+        }
+            else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle(myRB.getString("AppointmentAlert"));
+                alert.setHeaderText(myRB.getString("NoUpcoming"));
+                alert.setContentText(myRB.getString("Check"));
+                alert.showAndWait();
             }
         }
-    }
+
     TimeZoneInterface getZone = () -> timeZone.setText(ZoneId.systemDefault().toString());
     /**Lambda expression. This lambda expression is used to display the time zone and is used for more concise code*/
     public void setTimeZone() {
