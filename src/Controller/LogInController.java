@@ -127,6 +127,8 @@ public class LogInController implements Initializable {
     public void appointmentAlert() {
         boolean gtg = false;
         LocalDateTime logInTime = LocalDateTime.now();
+        Integer upcomingID = 0;
+        LocalDateTime upcomingStart = LocalDateTime.now();
         ObservableList<Apppointments> allAppointments = JDBC.getAllAppointments();
         ObservableList<Apppointments> upcoming = FXCollections.observableArrayList();
         for (Apppointments a : allAppointments) {
@@ -134,12 +136,14 @@ public class LogInController implements Initializable {
             long timeDifference = ChronoUnit.MINUTES.between(logInTime, start);
             if (timeDifference >= 0 && timeDifference <= 15) {
                 upcoming.add(a);
+                upcomingID = a.getAppointment_ID();
+                upcomingStart = a.getStart();
                 gtg = true;
             }
         }if (gtg == true) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle(myRB.getString("AppointmentAlert"));
-                alert.setHeaderText(myRB.getString("Upcoming"));
+                alert.setHeaderText((myRB.getString("Upcoming")) + " Appt # " + upcomingID + " at " + upcomingStart);
                 alert.setContentText(myRB.getString("Check"));
                 alert.showAndWait();
         }
